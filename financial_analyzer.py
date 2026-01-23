@@ -316,7 +316,7 @@ class GoogleSheetsFinancialAnalyzer:
 def main():
     """Main entry point."""
     # You can customize these settings
-    CREDENTIALS_FILE = 'credentials.json'
+    CREDENTIALS_FILE = os.path.expanduser('~/Desktop/credentials.json')
     SPREADSHEET_NAME = '2026 Budget [a.o. 12-25]'
     SHEET_RANGE = 'A:Z'  # Adjust this to your sheet range (e.g., 'Sheet1!A1:D100')
 
