@@ -1,0 +1,14 @@
+# Google Sheets Financial Analyzer Dependencies
+
+# Google API Client Libraries
+google-api-python-client==2.111.0
+google-auth-httplib2==0.2.0
+google-auth-oauthlib==1.2.0
+google-auth==2.26.2
+
+# Data Analysis
+pandas==2.1.4
+numpy==1.26.3
+
+# Additional utilities
+openpyxl==3.1.2  # For Excel export (optional)
