@@ -1,301 +1,332 @@
-"""
-Sales Retention Analysis with Payback Calculations
-
-Pulls cohort retention data from Metabase and creates comprehensive payback analysis
-with acquisition costs from Google Sheets.
-
-Output: Excel file with 6 sheets showing Pivot, Cumulative, and Payback analysis
-for both "Net Losses Full" and "Net Losses + Affiliate Payouts" cohorts.
-"""
-
-import requests
 import pandas as pd
-import numpy as np
 from datetime import datetime
-from google.oauth2 import service_account
+import requests
+from config import METABASE_URL, METABASE_API_KEY
+from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
-import openpyxl
-from openpyxl.styles import numbers
+import numpy as np
 
-# Import configuration
-import config
+print("=" * 80)
+print("SALES RETENTION EXPORT WITH CUMULATIVE & PAYBACK ANALYSIS")
+print("=" * 80)
 
-# Google Sheets setup
-SCOPES = ['https://www.googleapis.com/auth/spreadsheets.readonly']
+ACTUALS_SHEET_ID = '1-kbUBDVdLIXf0bbG4C_c7JWbyipGQtCdWjW7R7agiaM'
+BUDGET_SUMMARY_SHEET_ID = '1PY4MPmPXptZ3p4kJOmtS-mP35AfMq2DAvFG56CA9ffQ'
 CREDENTIALS_FILE = r'C:\Users\Tom Young\OneDrive\Desktop\credentials.json'
 
-# Metabase card IDs
-CARD_12462 = 12462  # Net Losses Full
-CARD_13018 = 13018  # Net Losses AND Affiliate Payouts
+CARD_IDS = {
+    12462: 'Net Losses Full',
+    13018: 'Net Losses AND Affiliate Payouts'
+}
 
-# Google Sheets IDs
-ACTUALS_SHEET_ID = '1-kbUBDVdLIXf0bbG4C_c7JWbyipGQtCdWjW7R7agiaM'
-BUDGET_SHEET_ID = '1PY4MPmPXptZ3p4kJOmtS-mP35AfMq2DAvFG56CA9ffQ'
+metabase_headers = {
+    "X-API-KEY": METABASE_API_KEY,
+    "Content-Type": "application/json"
+}
 
+# Step 1: Fetch ACTUALS spend
+print("\n1. Fetching ACTUALS Sales & Affiliate spend (completed months)...")
 
-def get_sheets_service():
-    """Create Google Sheets API service"""
-    credentials = service_account.Credentials.from_service_account_file(
-        CREDENTIALS_FILE, scopes=SCOPES)
-    return build('sheets', 'v4', credentials=credentials)
+try:
+    credentials = Credentials.from_service_account_file(
+        CREDENTIALS_FILE,
+        scopes=['https://www.googleapis.com/auth/spreadsheets.readonly']
+    )
+    sheets_service = build('sheets', 'v4', credentials=credentials)
 
-
-def fetch_actuals_spend():
-    """Fetch actuals spend data from Google Sheets"""
-    service = get_sheets_service()
-
-    # Fetch actuals from Sheet1
-    result = service.spreadsheets().values().get(
+    result = sheets_service.spreadsheets().values().get(
         spreadsheetId=ACTUALS_SHEET_ID,
         range='Sheet1!B2:F100'
     ).execute()
 
     values = result.get('values', [])
 
-    spend_data = {}
+    sales_spend = {}
+    affiliate_spend = {}
+    marketing_spend = {}
+
     for row in values:
-        if len(row) >= 4:  # Need at least Month, Total, Sales, Affiliate
-            month_str = row[0]
-            try:
-                # Parse the month
-                month_date = pd.to_datetime(month_str, errors='coerce')
-                if pd.isna(month_date):
-                    continue
+        if len(row) < 5:
+            continue
 
-                month_key = month_date.strftime('%Y-%m')
+        month_str = row[0]
+        sales_str = row[2]
+        affiliate_str = row[3]
+        marketing_str = row[4]
 
-                # Helper to parse numbers with commas
-                def parse_num(val):
-                    if not val:
-                        return 0
-                    if isinstance(val, str):
-                        return float(val.replace(',', ''))
-                    return float(val)
+        if not month_str or not sales_str or not affiliate_str:
+            continue
 
-                sales = parse_num(row[2]) if len(row) > 2 else 0
-                affiliate = parse_num(row[3]) if len(row) > 3 else 0
-                marketing = parse_num(row[4]) if len(row) > 4 else 0
-
-                spend_data[month_key] = {
-                    'sales': sales,
-                    'affiliate': affiliate,
-                    'marketing': marketing
-                }
-            except:
+        try:
+            month_date = pd.to_datetime(month_str, errors='coerce')
+            if pd.isna(month_date):
                 continue
 
-    return spend_data
+            month_key = month_date.strftime('%Y-%m')
 
+            sales_val = float(str(sales_str).replace('$', '').replace(',', '').strip())
+            affiliate_val = float(str(affiliate_str).replace('$', '').replace(',', '').strip())
+            marketing_val = float(str(marketing_str).replace('$', '').replace(',', '').strip()) if marketing_str else 0
 
-def fetch_budget_for_current_month():
-    """Fetch budget data for January 2026 from Budget Summary sheet"""
-    service = get_sheets_service()
+            sales_spend[month_key] = sales_val
+            affiliate_spend[month_key] = affiliate_val
+            marketing_spend[month_key] = marketing_val
 
-    # Fetch the specific cells
-    ranges = ['G27', 'G34', 'G42', 'G53']
-    result = service.spreadsheets().values().batchGet(
-        spreadsheetId=BUDGET_SHEET_ID,
-        ranges=[f"'Budget Summary'!{r}" for r in ranges]
-    ).execute()
-
-    values = result.get('valueRanges', [])
-
-    # Helper function to convert string with commas to float
-    def parse_number(value):
-        if isinstance(value, str):
-            return float(value.replace(',', ''))
-        return float(value)
-
-    # Extract values
-    creator_referral = parse_number(values[0].get('values', [[0]])[0][0]) if values[0].get('values') else 0
-    sales_spend = parse_number(values[1].get('values', [[0]])[0][0]) if values[1].get('values') else 0
-    am_spend = parse_number(values[2].get('values', [[0]])[0][0]) if values[2].get('values') else 0
-    total_marketing = parse_number(values[3].get('values', [[0]])[0][0]) if values[3].get('values') else 0
-
-    # Calculate final values
-    sales = sales_spend + am_spend - creator_referral
-    affiliate = creator_referral
-    marketing = total_marketing
-
-    return {
-        '2026-01': {
-            'sales': sales,
-            'affiliate': affiliate,
-            'marketing': marketing
-        }
-    }
-
-
-def fetch_metabase_data(card_id):
-    """Fetch data from Metabase card"""
-    url = f"{config.METABASE_URL}/api/card/{card_id}/query/json"
-    headers = {
-        "X-API-KEY": config.METABASE_API_KEY
-    }
-
-    response = requests.post(url, headers=headers)
-    response.raise_for_status()
-    return response.json()
-
-
-def create_pivot_table(data):
-    """Create pivot table with first_transaction_month as rows, period as columns"""
-    df = pd.DataFrame(data)
-
-    # Debug: Print available columns
-    print(f"Available columns: {df.columns.tolist()}")
-    print(f"First few rows:\n{df.head()}")
-
-    # Parse dates
-    df['first_transaction_month'] = pd.to_datetime(df['first_transaction_month'])
-
-    # Create pivot
-    pivot = df.pivot_table(
-        index='first_transaction_month',
-        columns='period',
-        values='contribution_profit',
-        aggfunc='sum'
-    )
-
-    # Sort by date
-    pivot = pivot.sort_index()
-
-    # Format index as YYYY-MM
-    pivot.index = pivot.index.strftime('%Y-%m')
-
-    return pivot
-
-
-def create_cumulative_table(pivot):
-    """Create cumulative table that only shows values for periods that have occurred"""
-    cumulative = pd.DataFrame(index=pivot.index, columns=pivot.columns)
-
-    current_date = datetime.now()
-
-    for cohort in pivot.index:
-        # Parse cohort date
-        try:
-            cohort_date = pd.to_datetime(cohort)
         except:
             continue
 
-        # Calculate months elapsed since cohort
-        months_elapsed = (current_date.year - cohort_date.year) * 12 + (current_date.month - cohort_date.month) + 1
+    print(f"   ✓ Retrieved actuals for {len(sales_spend)} months")
 
-        # Calculate cumulative values
-        row_values = pivot.loc[cohort].values
-        cumulative_values = []
-        running_sum = 0
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+    sales_spend = {}
+    affiliate_spend = {}
+    marketing_spend = {}
 
-        for period_idx, val in enumerate(row_values):
-            period_num = period_idx + 1
+# Step 2: Fetch BUDGET for current incomplete month (Jan 2026)
+print("\n2. Fetching BUDGET spend for current month from Budget Summary...")
 
-            if period_num <= months_elapsed:
-                if not pd.isna(val):
-                    running_sum += val
-                cumulative_values.append(running_sum)
-            else:
-                cumulative_values.append(np.nan)
+try:
+    # Get the specific cells we need
+    result = sheets_service.spreadsheets().values().batchGet(
+        spreadsheetId=BUDGET_SUMMARY_SHEET_ID,
+        ranges=[
+            'Budget Summary!G27',  # Creator referral
+            'Budget Summary!G34',  # Sales Spend
+            'Budget Summary!G42',  # AM Spend
+            'Budget Summary!G53'   # Total Marketing
+        ]
+    ).execute()
 
-        cumulative.loc[cohort] = cumulative_values
+    value_ranges = result.get('valueRanges', [])
 
-    return cumulative
+    if len(value_ranges) >= 4:
+        creator_referral_val = 0
+        sales_spend_val = 0
+        am_spend_val = 0
+        marketing_val = 0
 
+        # Parse each value
+        if value_ranges[0].get('values'):
+            creator_referral_val = float(str(value_ranges[0]['values'][0][0]).replace('$', '').replace(',', '').strip())
 
-def create_payback_table(cumulative, spend_data, spend_type):
-    """
-    Create payback table with acquisition costs and payback ratios
+        if value_ranges[1].get('values'):
+            sales_spend_val = float(str(value_ranges[1]['values'][0][0]).replace('$', '').replace(',', '').strip())
 
-    spend_type: 'net_losses_full' (Sales + Affiliate) or 'net_losses_affiliate' (Sales only)
-    """
-    payback = pd.DataFrame(index=cumulative.index)
+        if value_ranges[2].get('values'):
+            am_spend_val = float(str(value_ranges[2]['values'][0][0]).replace('$', '').replace(',', '').strip())
 
-    # Add acquisition cost column
-    acq_costs = []
-    for cohort_month in cumulative.index:
-        if cohort_month in spend_data:
-            if spend_type == 'net_losses_full':
-                # Sales + Affiliate
-                cost = spend_data[cohort_month]['sales'] + spend_data[cohort_month]['affiliate']
-            else:
-                # Sales only
-                cost = spend_data[cohort_month]['sales']
-            acq_costs.append(cost)
+        if value_ranges[3].get('values'):
+            marketing_val = float(str(value_ranges[3]['values'][0][0]).replace('$', '').replace(',', '').strip())
+
+        # Calculate for Jan 2026
+        jan_2026_sales = sales_spend_val + am_spend_val - creator_referral_val
+        jan_2026_affiliate = creator_referral_val
+        jan_2026_marketing = marketing_val
+
+        # Add to dictionaries for 2026-01
+        sales_spend['2026-01'] = jan_2026_sales
+        affiliate_spend['2026-01'] = jan_2026_affiliate
+        marketing_spend['2026-01'] = jan_2026_marketing
+
+        print(f"   ✓ Jan 2026 Budget:")
+        print(f"     Sales: ${jan_2026_sales:,.0f} (Sales ${sales_spend_val:,.0f} + AM ${am_spend_val:,.0f} - Creator Ref ${creator_referral_val:,.0f})")
+        print(f"     Affiliate: ${jan_2026_affiliate:,.0f}")
+        print(f"     Marketing: ${jan_2026_marketing:,.0f}")
+    else:
+        print(f"   ⚠ Could not read budget values")
+
+except Exception as e:
+    print(f"   ❌ Error: {e}")
+    import traceback
+    traceback.print_exc()
+
+print(f"\n   ✓ Total months with spend data: {len(sales_spend)}")
+
+# Step 3: Fetch Metabase data
+print("\n3. Fetching data from Metabase cards...")
+
+all_data = {}
+
+for card_id, card_name in CARD_IDS.items():
+    print(f"\n   Fetching: {card_name} (ID: {card_id})")
+
+    try:
+        response = requests.post(
+            f"{METABASE_URL}/api/card/{card_id}/query/json",
+            headers=metabase_headers
+        )
+        response.raise_for_status()
+        data = response.json()
+
+        if isinstance(data, list) and len(data) > 0:
+            df = pd.DataFrame(data)
+            all_data[card_name] = df
+            print(f"   ✓ Retrieved {len(df)} rows, {len(df.columns)} columns")
         else:
-            acq_costs.append(0)
+            print(f"   ⚠ No data returned")
 
-    payback['Acquisition Cost'] = acq_costs
+    except Exception as e:
+        print(f"   ❌ Error: {e}")
 
-    # Add payback ratios for each period
-    for col in cumulative.columns:
-        payback[f'Period {col}'] = cumulative[col] / payback['Acquisition Cost']
+if not all_data:
+    print("\n❌ No data retrieved")
+    exit(1)
 
-    return payback
+# Step 4: Create Excel with pivots, cumulative, and payback
+output_file = f'Sales_Retention_Analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
 
+print(f"\n4. Creating Excel file: {output_file}")
 
-def format_excel_sheet(writer, sheet_name, df, is_currency=True, is_percentage=False):
-    """Format Excel sheet with proper number formatting"""
-    df.to_excel(writer, sheet_name=sheet_name)
+current_date = datetime.now()
 
-    workbook = writer.book
-    worksheet = writer.sheets[sheet_name]
+with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
 
-    # Get the dimensions
-    max_row = len(df) + 1
-    max_col = len(df.columns) + 1
+    for card_name, df in all_data.items():
 
-    # Apply formatting
-    for row in range(2, max_row + 1):
-        for col in range(2, max_col + 1):
-            cell = worksheet.cell(row=row, column=col)
-            if is_percentage:
+        print(f"\n   Processing: {card_name}")
+
+        if 'affiliate' in card_name.lower() and 'and' in card_name.lower():
+            spend_type = "Sales"
+            print(f"   → Using Sales spend only")
+        else:
+            spend_type = "Sales + Affiliate"
+            print(f"   → Using Sales + Affiliate spend")
+
+        cohort_col = None
+        period_col = None
+        value_col = None
+
+        for col in df.columns:
+            col_lower = str(col).lower()
+            if 'first transaction month' in col_lower or 'first_transaction_month' in col_lower:
+                cohort_col = col
+            elif 'period' in col_lower:
+                period_col = col
+            elif 'contribution' in col_lower or 'profit' in col_lower:
+                value_col = col
+
+        if not all([cohort_col, period_col, value_col]):
+            print(f"   ⚠ Missing columns, skipping")
+            continue
+
+        pivot = df.pivot_table(
+            values=value_col,
+            index=cohort_col,
+            columns=period_col,
+            aggfunc='sum',
+            fill_value=0
+        )
+
+        print(f"   ✓ Pivot: {pivot.shape[0]} cohorts x {pivot.shape[1]} periods")
+
+        # Create cumulative
+        cumulative = pivot.copy()
+
+        for cohort in cumulative.index:
+            cohort_str = str(cohort)
+
+            try:
+                if 'T' in cohort_str:
+                    cohort_date = pd.to_datetime(cohort_str.split('T')[0])
+                else:
+                    cohort_date = pd.to_datetime(cohort_str)
+
+                months_elapsed = (current_date.year - cohort_date.year) * 12 + (current_date.month - cohort_date.month) + 1
+
+                row_values = pivot.loc[cohort].values
+                cumulative_values = []
+                running_sum = 0
+
+                for period_idx, val in enumerate(row_values):
+                    period_num = period_idx + 1
+                    if period_num <= months_elapsed:
+                        running_sum += val
+                        cumulative_values.append(running_sum)
+                    else:
+                        cumulative_values.append(np.nan)
+
+                cumulative.loc[cohort] = cumulative_values
+
+            except:
+                cumulative.loc[cohort] = pivot.loc[cohort].cumsum()
+
+        print(f"   ✓ Cumulative pivot created")
+
+        # Match spend
+        spend_matched = {}
+
+        print(f"\n   Matching spend to cohorts:")
+        for cohort in pivot.index:
+            cohort_str = str(cohort)
+
+            try:
+                if 'T' in cohort_str:
+                    cohort_date = pd.to_datetime(cohort_str.split('T')[0])
+                else:
+                    cohort_date = pd.to_datetime(cohort_str)
+
+                month_key = cohort_date.strftime('%Y-%m')
+
+                if month_key in sales_spend:
+                    if spend_type == "Sales":
+                        spend_matched[cohort] = sales_spend[month_key]
+                    else:
+                        spend_matched[cohort] = sales_spend[month_key] + affiliate_spend.get(month_key, 0)
+
+                    source = "BUDGET" if month_key == "2026-01" else "ACTUALS"
+                    print(f"   ✓ {cohort_str[:10]} → {month_key} → ${spend_matched[cohort]:,.0f} ({source})")
+                else:
+                    print(f"   ✗ {cohort_str[:10]} → {month_key} (not found)")
+
+            except Exception as e:
+                print(f"   ✗ {cohort_str[:10]} - error: {e}")
+
+        spend_series = pd.Series(spend_matched, name=spend_type + ' Spend')
+        print(f"\n   ✓ Matched spend for {len(spend_matched)}/{len(pivot.index)} cohorts")
+
+        # Calculate payback ratios
+        payback = cumulative.copy()
+        for cohort in payback.index:
+            if cohort in spend_matched and spend_matched[cohort] > 0:
+                spend = spend_matched[cohort]
+                payback.loc[cohort] = cumulative.loc[cohort] / spend
+            else:
+                payback.loc[cohort] = np.nan
+
+        print(f"   ✓ Payback ratios calculated")
+
+        sheet_base = card_name[:20].replace('/', '-')
+
+        pivot.to_excel(writer, sheet_name=f'{sheet_base} Pivot')
+        ws_pivot = writer.sheets[f'{sheet_base} Pivot']
+
+        cumulative.to_excel(writer, sheet_name=f'{sheet_base} Cumulative')
+        ws_cumulative = writer.sheets[f'{sheet_base} Cumulative']
+
+        payback_with_spend = payback.copy()
+        payback_with_spend.insert(0, spend_type + ' Spend', spend_series)
+        payback_with_spend.to_excel(writer, sheet_name=f'{sheet_base} Payback')
+        ws_payback = writer.sheets[f'{sheet_base} Payback']
+
+        from openpyxl.styles import numbers
+
+        for ws in [ws_pivot, ws_cumulative]:
+            for row in range(2, pivot.shape[0] + 2):
+                for col in range(2, pivot.shape[1] + 2):
+                    cell = ws.cell(row=row, column=col)
+                    cell.number_format = '$#,##0'
+
+        for row in range(2, payback_with_spend.shape[0] + 2):
+            cell = ws_payback.cell(row=row, column=2)
+            cell.number_format = '$#,##0'
+            for col in range(3, payback_with_spend.shape[1] + 2):
+                cell = ws_payback.cell(row=row, column=col)
                 cell.number_format = '0.00%'
-            elif is_currency:
-                cell.number_format = '$#,##0'
 
-    return worksheet
+        print(f"   ✓ Exported 3 sheets for {card_name}")
 
-
-def main():
-    """Main execution function"""
-    print("Fetching spend data from Google Sheets...")
-    actuals_spend = fetch_actuals_spend()
-    budget_spend = fetch_budget_for_current_month()
-
-    # Combine actuals and budget
-    all_spend = {**actuals_spend, **budget_spend}
-
-    print(f"Loaded spend data for {len(all_spend)} months")
-
-    # Create timestamp for filename
-    timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-    output_file = f'Sales_Payback_Analysis_{timestamp}.xlsx'
-
-    with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
-        # Process Card 12462 (Net Losses Full)
-        print("\nProcessing Card 12462 (Net Losses Full)...")
-        data_12462 = fetch_metabase_data(CARD_12462)
-        pivot_12462 = create_pivot_table(data_12462)
-        cumulative_12462 = create_cumulative_table(pivot_12462)
-        payback_12462 = create_payback_table(cumulative_12462, all_spend, 'net_losses_full')
-
-        format_excel_sheet(writer, 'Net Losses Full - Pivot', pivot_12462, is_currency=True)
-        format_excel_sheet(writer, 'Net Losses Full - Cumulative', cumulative_12462, is_currency=True)
-        format_excel_sheet(writer, 'Net Losses Full - Payback', payback_12462, is_currency=False, is_percentage=True)
-
-        # Process Card 13018 (Net Losses + Affiliate Payouts)
-        print("Processing Card 13018 (Net Losses + Affiliate Payouts)...")
-        data_13018 = fetch_metabase_data(CARD_13018)
-        pivot_13018 = create_pivot_table(data_13018)
-        cumulative_13018 = create_cumulative_table(pivot_13018)
-        payback_13018 = create_payback_table(cumulative_13018, all_spend, 'net_losses_affiliate')
-
-        format_excel_sheet(writer, 'Net Losses+Affiliate - Pivot', pivot_13018, is_currency=True)
-        format_excel_sheet(writer, 'Net Losses+Affiliate - Cumulative', cumulative_13018, is_currency=True)
-        format_excel_sheet(writer, 'Net Losses+Affiliate - Payback', payback_13018, is_currency=False, is_percentage=True)
-
-    print(f"\n✓ Analysis complete! Output saved to: {output_file}")
-
-
-if __name__ == "__main__":
-    main()
+print(f"\n✅ Complete!")
+print(f"\nFile: {output_file}")
+print(f"\nNote: Actuals for completed months, Budget Summary for Jan 2026")
+print("\n" + "=" * 80)
