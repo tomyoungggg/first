@@ -142,6 +142,10 @@ def create_pivot_table(data):
     """Create pivot table with first_transaction_month as rows, period as columns"""
     df = pd.DataFrame(data)
 
+    # Debug: Print available columns
+    print(f"Available columns: {df.columns.tolist()}")
+    print(f"First few rows:\n{df.head()}")
+
     # Parse dates
     df['first_transaction_month'] = pd.to_datetime(df['first_transaction_month'])
 
