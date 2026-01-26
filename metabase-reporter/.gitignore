@@ -1,0 +1,45 @@
+# Credentials and config
+config.py
+credentials.json
+*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Data exports and reports
+*.csv
+*.xlsx
+dashboard_structure.json
+*_export_*.xlsx
+*_Report_*.xlsx
+*_Analysis_*.xlsx
+*_Pivots_*.xlsx
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+test_*.py
+debug_*.py
