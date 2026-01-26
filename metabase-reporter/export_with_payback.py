@@ -64,9 +64,17 @@ def fetch_actuals_spend():
 
                 month_key = month_date.strftime('%Y-%m')
 
-                sales = float(row[2]) if len(row) > 2 and row[2] else 0
-                affiliate = float(row[3]) if len(row) > 3 and row[3] else 0
-                marketing = float(row[4]) if len(row) > 4 and row[4] else 0
+                # Helper to parse numbers with commas
+                def parse_num(val):
+                    if not val:
+                        return 0
+                    if isinstance(val, str):
+                        return float(val.replace(',', ''))
+                    return float(val)
+
+                sales = parse_num(row[2]) if len(row) > 2 else 0
+                affiliate = parse_num(row[3]) if len(row) > 3 else 0
+                marketing = parse_num(row[4]) if len(row) > 4 else 0
 
                 spend_data[month_key] = {
                     'sales': sales,
@@ -92,11 +100,17 @@ def fetch_budget_for_current_month():
 
     values = result.get('valueRanges', [])
 
+    # Helper function to convert string with commas to float
+    def parse_number(value):
+        if isinstance(value, str):
+            return float(value.replace(',', ''))
+        return float(value)
+
     # Extract values
-    creator_referral = float(values[0].get('values', [[0]])[0][0]) if values[0].get('values') else 0
-    sales_spend = float(values[1].get('values', [[0]])[0][0]) if values[1].get('values') else 0
-    am_spend = float(values[2].get('values', [[0]])[0][0]) if values[2].get('values') else 0
-    total_marketing = float(values[3].get('values', [[0]])[0][0]) if values[3].get('values') else 0
+    creator_referral = parse_number(values[0].get('values', [[0]])[0][0]) if values[0].get('values') else 0
+    sales_spend = parse_number(values[1].get('values', [[0]])[0][0]) if values[1].get('values') else 0
+    am_spend = parse_number(values[2].get('values', [[0]])[0][0]) if values[2].get('values') else 0
+    total_marketing = parse_number(values[3].get('values', [[0]])[0][0]) if values[3].get('values') else 0
 
     # Calculate final values
     sales = sales_spend + am_spend - creator_referral
