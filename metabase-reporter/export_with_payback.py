@@ -44,10 +44,10 @@ def fetch_actuals_spend():
     """Fetch actuals spend data from Google Sheets"""
     service = get_sheets_service()
 
-    # Fetch actuals from Department tab
+    # Fetch actuals from Sheet1
     result = service.spreadsheets().values().get(
         spreadsheetId=ACTUALS_SHEET_ID,
-        range='Department!B2:F100'
+        range='Sheet1!B2:F100'
     ).execute()
 
     values = result.get('values', [])
