@@ -302,7 +302,11 @@ if gtv_retention is not None:
 if logo_retention is not None:
     print(f"   ✓ Logo retention calculated")
 
-# Keep raw logo counts as well (not retention %)
+# Keep raw values as well (not retention %)
+gtv_raw = gtv_pivot if gtv_pivot is not None else None
+if gtv_raw is not None:
+    print(f"   ✓ GTV raw values preserved")
+
 logo_counts = logo_pivot if logo_pivot is not None else None
 if logo_counts is not None:
     print(f"   ✓ Logo counts preserved")
@@ -367,7 +371,23 @@ with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
 
         ws_row += net_losses_cumulative.shape[0] + 4
 
-    # SECTION 4: GTV Retention
+    # SECTION 4: GTV Raw Values
+    if gtv_raw is not None:
+        header_cell = ws.cell(row=ws_row, column=1)
+        header_cell.value = "GTV Raw Values"
+        header_cell.font = Font(bold=True)
+
+        gtv_raw.to_excel(writer, sheet_name='Analysis', startrow=ws_row + 1)
+
+        # Format as currency
+        for row in range(ws_row + 3, ws_row + gtv_raw.shape[0] + 3):
+            for col in range(2, gtv_raw.shape[1] + 2):
+                cell = ws.cell(row=row, column=col)
+                cell.number_format = '$#,##0'
+
+        ws_row += gtv_raw.shape[0] + 4
+
+    # SECTION 5: GTV Retention
     if gtv_retention is not None:
         header_cell = ws.cell(row=ws_row, column=1)
         header_cell.value = "GTV Retention %"
@@ -383,7 +403,7 @@ with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
 
         ws_row += gtv_retention.shape[0] + 4
 
-    # SECTION 5: Logo Retention
+    # SECTION 6: Logo Retention
     if logo_retention is not None:
         header_cell = ws.cell(row=ws_row, column=1)
         header_cell.value = "Logo Retention %"
@@ -399,7 +419,7 @@ with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
 
         ws_row += logo_retention.shape[0] + 4
 
-    # SECTION 6: Logo Counts (Raw)
+    # SECTION 7: Logo Counts (Raw)
     if logo_counts is not None:
         header_cell = ws.cell(row=ws_row, column=1)
         header_cell.value = "Logo Counts (Raw)"
@@ -424,6 +444,8 @@ print(f"  - Profit cumulative ($)")
 print(f"  - Profit payback (%)")
 if net_losses_cumulative is not None:
     print(f"  - Net losses cumulative ($)")
+if gtv_raw is not None:
+    print(f"  - GTV raw values ($)")
 if gtv_retention is not None:
     print(f"  - GTV retention (%)")
 if logo_retention is not None:
