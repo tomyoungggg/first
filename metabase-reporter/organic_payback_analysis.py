@@ -72,25 +72,43 @@ except Exception as e:
     print(f"   ❌ Error: {e}")
     organic_spend = {}
 
-# Step 2: Fetch BUDGET for current incomplete month (Jan 2026)
-print("\n2. Fetching BUDGET spend for current month from Budget Summary...")
+# Step 2: Fetch BUDGET for current incomplete month (Jan 2026) from Marketing column
+print("\n2. Fetching BUDGET spend for current month from Sheet1 Marketing column...")
 
 try:
+    # Re-read Sheet1 to get Jan 2026 from column F (Marketing)
     result = sheets_service.spreadsheets().values().get(
-        spreadsheetId=BUDGET_SUMMARY_SHEET_ID,
-        range='Budget Summary!G47'  # Organic Spend
+        spreadsheetId=ACTUALS_SHEET_ID,
+        range='Sheet1!B2:F100'
     ).execute()
 
     values = result.get('values', [])
 
-    if values and len(values) > 0:
-        organic_spend_val = float(str(values[0][0]).replace('$', '').replace(',', '').strip())
-        organic_spend['2026-01'] = organic_spend_val
+    for row in values:
+        if len(row) < 5:
+            continue
 
-        print(f"   ✓ Jan 2026 Budget:")
-        print(f"     Organic: ${organic_spend_val:,.0f}")
-    else:
-        print(f"   ⚠ Could not read budget value")
+        month_str = row[0]
+
+        if not month_str:
+            continue
+
+        try:
+            month_date = pd.to_datetime(month_str, errors='coerce')
+            if pd.isna(month_date):
+                continue
+
+            month_key = month_date.strftime('%Y-%m')
+
+            # For Jan 2026, use Marketing column (F)
+            if month_key == '2026-01' and len(row) >= 5 and row[4]:
+                marketing_val = float(str(row[4]).replace('$', '').replace(',', '').strip())
+                organic_spend['2026-01'] = marketing_val
+                print(f"   ✓ Jan 2026 Budget (Marketing): ${marketing_val:,.0f}")
+                break
+
+        except:
+            continue
 
 except Exception as e:
     print(f"   ❌ Error: {e}")
