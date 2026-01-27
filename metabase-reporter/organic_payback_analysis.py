@@ -144,23 +144,28 @@ def fetch_and_process_card(card_id, card_name):
     period_col = None
     value_col = None
 
+    print(f"   Available columns: {list(df.columns)}")
+
     for col in df.columns:
         col_lower = str(col).lower()
         if 'first transaction month' in col_lower or 'first_transaction_month' in col_lower:
             cohort_col = col
         elif 'period' in col_lower:
             period_col = col
-        elif any(x in col_lower for x in ['contribution', 'profit', 'gtv', 'logo', 'count', 'loss']):
+        elif any(x in col_lower for x in ['contribution', 'profit', 'gtv', 'logo', 'count', 'loss', 'gross transaction value']):
             # Skip percentage columns (like "% of GTV" for net losses)
             if '%' in col_lower or 'percent' in col_lower or 'pct' in col_lower:
+                print(f"   Skipping percentage column: {col}")
                 continue
             # Skip ratio columns (like "net losses as % of gtv")
             if 'as %' in col_lower or 'ratio' in col_lower:
+                print(f"   Skipping ratio column: {col}")
                 continue
             value_col = col
 
     if not all([cohort_col, period_col, value_col]):
         print(f"   ❌ Missing columns")
+        print(f"   Cohort: {cohort_col}, Period: {period_col}, Value: {value_col}")
         return None
 
     print(f"   ✓ Using value column: {value_col}")
@@ -297,6 +302,11 @@ if gtv_retention is not None:
 if logo_retention is not None:
     print(f"   ✓ Logo retention calculated")
 
+# Keep raw logo counts as well (not retention %)
+logo_counts = logo_pivot if logo_pivot is not None else None
+if logo_counts is not None:
+    print(f"   ✓ Logo counts preserved")
+
 # Write to Excel
 output_file = f'Organic_Retention_Analysis_{datetime.now().strftime("%Y%m%d_%H%M%S")}.xlsx'
 
@@ -389,6 +399,22 @@ with pd.ExcelWriter(output_file, engine='openpyxl') as writer:
 
         ws_row += logo_retention.shape[0] + 4
 
+    # SECTION 6: Logo Counts (Raw)
+    if logo_counts is not None:
+        header_cell = ws.cell(row=ws_row, column=1)
+        header_cell.value = "Logo Counts (Raw)"
+        header_cell.font = Font(bold=True)
+
+        logo_counts.to_excel(writer, sheet_name='Analysis', startrow=ws_row + 1)
+
+        # Format as whole numbers
+        for row in range(ws_row + 3, ws_row + logo_counts.shape[0] + 3):
+            for col in range(2, logo_counts.shape[1] + 2):
+                cell = ws.cell(row=row, column=col)
+                cell.number_format = '#,##0'
+
+        ws_row += logo_counts.shape[0] + 4
+
     print(f"   ✓ Exported all sections to 'Analysis' sheet")
 
 print(f"\n✅ Complete!")
@@ -402,4 +428,6 @@ if gtv_retention is not None:
     print(f"  - GTV retention (%)")
 if logo_retention is not None:
     print(f"  - Logo retention (%)")
+if logo_counts is not None:
+    print(f"  - Logo counts (raw #)")
 print("\n" + "=" * 80)
