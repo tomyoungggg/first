@@ -133,6 +133,12 @@ def fetch_and_process_card(card_id, card_name):
         elif 'period' in col_lower:
             period_col = col
         elif any(x in col_lower for x in ['contribution', 'profit', 'gtv', 'logo', 'count', 'loss']):
+            # Skip percentage columns (like "% of GTV" for net losses)
+            if '%' in col_lower or 'percent' in col_lower or 'pct' in col_lower:
+                continue
+            # Skip ratio columns (like "net losses as % of gtv")
+            if 'as %' in col_lower or 'ratio' in col_lower:
+                continue
             value_col = col
 
     if not all([cohort_col, period_col, value_col]):
