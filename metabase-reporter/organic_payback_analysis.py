@@ -25,8 +25,8 @@ metabase_headers = {
     "Content-Type": "application/json"
 }
 
-# Step 1: Fetch ACTUALS Organic spend (completed months)
-print("\n1. Fetching ACTUALS Organic spend (completed months)...")
+# Step 1: Fetch ACTUALS Marketing spend (completed months)
+print("\n1. Fetching ACTUALS Marketing spend (completed months)...")
 
 try:
     credentials = Credentials.from_service_account_file(
@@ -49,9 +49,9 @@ try:
             continue
 
         month_str = row[0]
-        organic_str = row[3]  # Column E is Organic spend
+        marketing_str = row[4]  # Column F is Marketing spend
 
-        if not month_str or not organic_str:
+        if not month_str or not marketing_str:
             continue
 
         try:
@@ -60,8 +60,8 @@ try:
                 continue
 
             month_key = month_date.strftime('%Y-%m')
-            organic_val = float(str(organic_str).replace('$', '').replace(',', '').strip())
-            organic_spend[month_key] = organic_val
+            marketing_val = float(str(marketing_str).replace('$', '').replace(',', '').strip())
+            organic_spend[month_key] = marketing_val
 
         except:
             continue
@@ -280,7 +280,7 @@ for cohort in profit_pivot.index:
     except:
         pass
 
-spend_series = pd.Series(spend_matched, name='Organic Spend')
+spend_series = pd.Series(spend_matched, name='Marketing Spend')
 
 # Calculate payback ratios
 profit_payback = profit_cumulative.copy()
