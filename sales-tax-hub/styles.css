@@ -2098,3 +2098,132 @@ body {
 .tax-matrix-table tr:hover td.sticky-col {
     background: #e2e8f0;
 }
+
+/* ============================================
+   Implementation Section Styles
+   ============================================ */
+
+.implementation-section {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.implementation-section h2 {
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.implementation-section h3 {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* Current State */
+.current-state-card {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.current-state-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: white;
+    border-bottom: 1px solid #86efac;
+}
+
+.region-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: white;
+}
+
+.region-badge.uk {
+    background: #1e40af;
+}
+
+.region-badge.eu {
+    background: #003399;
+}
+
+.status-active {
+    margin-left: auto;
+    padding: 6px 12px;
+    background: #dcfce7;
+    color: #16a34a;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.current-state-body {
+    padding: 20px;
+}
+
+.current-state-body p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 12px;
+}
+
+.current-state-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+}
+
+.current-state-list li {
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    background: white;
+    border-radius: var(--radius-md);
+    border-left: 3px solid #16a34a;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.current-state-note {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed #86efac;
+}
+
+/* Future State within Implementation */
+.implementation-section.future-state .future-state-intro {
+    margin-bottom: 24px;
+}
+
+/* Numeral Note in Taxability */
+.numeral-note {
+    background: #eef2ff;
+    border: 1px solid #c7d2fe;
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.numeral-note p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+    line-height: 1.5;
+}
