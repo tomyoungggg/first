@@ -2159,6 +2159,10 @@ body {
     background: #003399;
 }
 
+.region-badge.us {
+    background: #dc2626;
+}
+
 .status-active {
     margin-left: auto;
     padding: 6px 12px;
@@ -2167,6 +2171,30 @@ body {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
+}
+
+.status-inactive {
+    margin-left: auto;
+    padding: 6px 12px;
+    background: #fef3c7;
+    color: #b45309;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.current-state-card.us-states {
+    background: #fefce8;
+    border: 1px solid #fde047;
+    margin-top: 16px;
+}
+
+.current-state-card.us-states .current-state-header {
+    border-bottom: 1px solid #fde047;
+}
+
+.current-state-list.inactive li {
+    border-left: 3px solid #f59e0b;
 }
 
 .current-state-body {
