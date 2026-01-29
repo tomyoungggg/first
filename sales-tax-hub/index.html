@@ -10,6 +10,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Password Gate -->
+    <div id="loginOverlay" class="login-overlay">
+        <div class="login-container">
+            <div class="login-logo">W</div>
+            <h1>Sales Tax Hub</h1>
+            <p>Enter password to continue</p>
+            <form id="loginForm" onsubmit="return checkPassword(event)">
+                <input type="password" id="passwordInput" placeholder="Password" autocomplete="off" required>
+                <button type="submit">Access Hub</button>
+                <p id="loginError" class="login-error"></p>
+            </form>
+        </div>
+    </div>
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-brand">

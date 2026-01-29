@@ -1,3 +1,40 @@
+// Password Protection
+// Change this password to whatever you want
+const SITE_PASSWORD = 'whoptax2026';
+
+// Check if already authenticated
+function checkAuth() {
+    if (sessionStorage.getItem('taxhub_authenticated') === 'true') {
+        hideLogin();
+    }
+}
+
+function checkPassword(event) {
+    event.preventDefault();
+    const input = document.getElementById('passwordInput');
+    const error = document.getElementById('loginError');
+
+    if (input.value === SITE_PASSWORD) {
+        sessionStorage.setItem('taxhub_authenticated', 'true');
+        hideLogin();
+    } else {
+        error.textContent = 'Incorrect password. Please try again.';
+        input.value = '';
+        input.focus();
+    }
+    return false;
+}
+
+function hideLogin() {
+    const overlay = document.getElementById('loginOverlay');
+    if (overlay) {
+        overlay.classList.add('hidden');
+    }
+}
+
+// Run auth check on page load
+document.addEventListener('DOMContentLoaded', checkAuth);
+
 // State Data
 const statesData = [
     { name: 'Alabama', abbr: 'AL', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$250,000', transactionThreshold: null },

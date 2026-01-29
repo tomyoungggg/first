@@ -1,0 +1,11 @@
+# Netlify configuration for Sales Tax Hub
+
+[build]
+  # No build command needed - it's a static site
+  publish = "."
+
+# Redirect index to root
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
