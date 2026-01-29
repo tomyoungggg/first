@@ -1600,8 +1600,11 @@ body {
     font-weight: 500;
 }
 
-/* Policy Diagram */
-.policy-diagram {
+/* ============================================
+   Future State Section Styles
+   ============================================ */
+
+.future-state-intro {
     background: var(--card-background);
     border-radius: var(--radius-lg);
     padding: 24px;
@@ -1610,28 +1613,57 @@ body {
     border: 1px solid var(--border-color);
 }
 
-.policy-diagram h2 {
+.partner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #6366f1, #4f46e5);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.badge-icon {
+    width: 24px;
+    height: 24px;
+    background: white;
+    color: #6366f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.future-state-intro p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.flow-diagram-container {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.flow-diagram-container h2 {
     color: var(--text-primary);
     font-size: 20px;
     font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.diagram-note {
-    color: var(--text-secondary);
-    font-size: 14px;
     margin-bottom: 24px;
 }
 
-/* Flow Diagram Styles */
-.flow-diagram {
-    margin-top: 20px;
-}
-
-.flow-header {
+.flow-question {
     text-align: center;
     padding: 12px 24px;
-    background: linear-gradient(135deg, #64748b, #475569);
+    background: #1e293b;
     color: white;
     font-weight: 600;
     font-size: 16px;
@@ -1642,219 +1674,179 @@ body {
     margin-right: auto;
 }
 
-.flow-columns {
+.flow-paths {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 2fr;
     gap: 24px;
 }
 
 @media (max-width: 1024px) {
-    .flow-columns {
+    .flow-paths {
         grid-template-columns: 1fr;
     }
 }
 
-.flow-column {
+.flow-path {
     border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border-color);
 }
 
-.flow-card-header {
-    padding: 16px 20px;
+.path-header {
+    padding: 14px 20px;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 15px;
     color: white;
 }
 
-.flow-card-header.discover {
-    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+.path-header.discover {
+    background: #7c3aed;
 }
 
-.flow-card-header.dtc {
-    background: linear-gradient(135deg, #eab308, #ca8a04);
+.path-header.dtc {
+    background: #d97706;
 }
 
-.flow-card-body {
+.path-content {
     padding: 20px;
     background: white;
-    border: 1px solid var(--border-color);
-    border-top: none;
-    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
-.flow-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px;
-    margin-bottom: 8px;
-    background: var(--background-color);
-    border-radius: var(--radius-md);
-}
-
-.flow-item.warning {
-    background: #fef3c7;
-}
-
-.flow-icon {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.flow-icon.check {
-    background: #d1fae5;
-}
-
-.flow-icon.check::before {
-    content: "✓";
-    color: #047857;
-    font-weight: bold;
-    font-size: 12px;
-}
-
-.flow-icon.doc {
-    background: #dbeafe;
-}
-
-.flow-icon.doc::before {
-    content: "📄";
-    font-size: 12px;
-}
-
-.flow-icon.invoice {
-    background: #fce7f3;
-}
-
-.flow-icon.invoice::before {
-    content: "🧾";
-    font-size: 12px;
-}
-
-.flow-icon.alert {
-    background: #fef3c7;
-}
-
-.flow-icon.alert::before {
-    content: "⚠";
-    color: #b45309;
-    font-size: 14px;
-}
-
-.flow-item strong {
-    display: block;
-    font-size: 14px;
-    color: var(--text-primary);
-    margin-bottom: 2px;
-}
-
-.flow-item p {
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin: 0;
-}
-
-.flow-role {
-    padding: 10px 16px;
-    border-radius: var(--radius-md);
-    font-size: 13px;
-    font-weight: 600;
-    text-align: center;
-    margin-top: 12px;
-}
-
-.flow-role.marketplace {
-    background: #ede9fe;
-    color: #6d28d9;
-}
-
-.flow-role.mor {
-    background: #dcfce7;
-    color: #15803d;
-}
-
-.flow-role.processor {
-    background: #e0f2fe;
-    color: #0369a1;
-}
-
-.flow-note {
+.path-item {
     padding: 12px 16px;
-    background: #fef9c3;
-    border-left: 3px solid #eab308;
-    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-bottom: 10px;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.path-item.highlight {
+    background: #fef3c7;
+    border-left: 3px solid #d97706;
+}
+
+.path-item strong {
+    color: var(--text-primary);
+}
+
+.path-role {
+    padding: 12px 16px;
+    background: #ede9fe;
+    border-radius: var(--radius-md);
+    font-size: 14px;
+    color: #6d28d9;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.override-note {
+    padding: 16px;
+    background: #fefce8;
+    border: 1px solid #fde047;
+    border-radius: var(--radius-md);
     margin: 16px 0;
     font-size: 13px;
     color: var(--text-primary);
+    line-height: 1.6;
 }
 
-.flow-note strong {
+.override-note strong {
     color: #92400e;
 }
 
-/* Option Cards */
-.flow-option {
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
     margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .options-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.option-card {
     padding: 16px;
-    background: var(--background-color);
+    background: #f8fafc;
     border-radius: var(--radius-md);
     border: 1px solid var(--border-color);
 }
 
-.option-header {
+.option-card.option-1 {
+    border-top: 3px solid #6366f1;
+}
+
+.option-card.option-2 {
+    border-top: 3px solid #10b981;
+}
+
+.option-card.option-3 {
+    border-top: 3px solid #f59e0b;
+}
+
+.option-card.option-4 {
+    border-top: 3px solid #ef4444;
+}
+
+.option-number {
     display: inline-block;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    color: white;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     margin-bottom: 8px;
 }
 
-.option-header.option-1 {
-    background: #6366f1;
+.option-card.option-1 .option-number {
+    background: #eef2ff;
+    color: #6366f1;
 }
 
-.option-header.option-2 {
-    background: #10b981;
+.option-card.option-2 .option-number {
+    background: #ecfdf5;
+    color: #10b981;
 }
 
-.option-header.option-3 {
-    background: #f59e0b;
+.option-card.option-3 .option-number {
+    background: #fffbeb;
+    color: #f59e0b;
 }
 
-.option-header.option-4 {
-    background: #ef4444;
+.option-card.option-4 .option-number {
+    background: #fef2f2;
+    color: #ef4444;
 }
 
-.option-title {
+.option-name {
     font-size: 15px;
     font-weight: 600;
     color: var(--text-primary);
     margin-bottom: 12px;
 }
 
-.option-list {
+.option-card ul {
     list-style: none;
     padding: 0;
     margin: 0 0 12px 0;
 }
 
-.option-list li {
-    padding: 6px 0;
-    padding-left: 20px;
+.option-card ul li {
+    padding: 5px 0;
+    padding-left: 16px;
     position: relative;
     font-size: 13px;
     color: var(--text-secondary);
+    line-height: 1.4;
 }
 
-.option-list li::before {
-    content: "→";
+.option-card ul li::before {
+    content: "•";
     position: absolute;
     left: 0;
     color: var(--text-muted);
@@ -1862,23 +1854,19 @@ body {
 
 .option-note {
     padding: 8px 12px;
+    background: #f1f5f9;
     border-radius: var(--radius-sm);
     font-size: 12px;
-    font-weight: 500;
+    color: var(--text-secondary);
     margin-bottom: 12px;
+    font-style: italic;
 }
 
-.option-note.warning {
-    background: #fef3c7;
-    color: #92400e;
-}
-
-.option-note.info {
-    background: #dbeafe;
-    color: #1e40af;
-}
-
-.option-note.error {
-    background: #fee2e2;
-    color: #991b1b;
+.option-role {
+    padding: 10px 12px;
+    background: #e0f2fe;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    color: #0369a1;
+    text-align: center;
 }

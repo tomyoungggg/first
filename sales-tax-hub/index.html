@@ -33,6 +33,7 @@
             <div class="nav-links">
                 <a href="#dashboard" class="nav-link active">Dashboard</a>
                 <a href="#policy" class="nav-link">Policy</a>
+                <a href="#future-state" class="nav-link">Future State</a>
                 <a href="#registrations" class="nav-link">Registrations</a>
                 <a href="#states" class="nav-link">State Directory</a>
                 <a href="#resources" class="nav-link">Resources</a>
@@ -240,16 +241,13 @@
         <section id="policy" class="section hidden">
             <div class="section-header">
                 <h1>Whop Indirect Tax Policy</h1>
-                <p class="subtitle">Our framework for managing sales tax and VAT compliance</p>
             </div>
 
-            <!-- Policy Overview -->
             <div class="policy-section">
                 <h2>1. Overview</h2>
                 <p>Whop operates a global software marketplace where creators monetize and deliver digital products and services. This document establishes the framework by which Whop manages its indirect tax obligations—including sales tax, value-added tax (VAT), and goods and services tax (GST)—in the United States and foreign jurisdictions. Adherence to this policy ensures compliance, mitigates audit risk, and maintains consumer trust.</p>
             </div>
 
-            <!-- Terms of Service -->
             <div class="policy-section">
                 <h2>2. Terms of Service and Allocation of Responsibility</h2>
                 <p>Whop's Terms of Service clearly establish that sellers using the platform are the merchants of record for the transactions they facilitate. As such, the primary obligation to collect and remit sales and use tax falls upon each seller, except where Whop is legally required to act as a "marketplace facilitator" under state or foreign law.</p>
@@ -259,7 +257,6 @@
                 </ul>
             </div>
 
-            <!-- US Sales and Use Tax -->
             <div class="policy-section">
                 <h2>3. US Sales and Use Tax</h2>
 
@@ -280,7 +277,6 @@
                 <p>Whop remits collected taxes and files returns on the schedule determined by each state (monthly, quarterly, or annually). Filing is handled through automated compliance tools with reconciliation and oversight by the Finance team.</p>
             </div>
 
-            <!-- Foreign Indirect Tax -->
             <div class="policy-section">
                 <h2>4. Foreign Indirect Tax</h2>
 
@@ -291,7 +287,6 @@
                 <p>Where required by local law (e.g., the EU's One Stop Shop scheme), Whop registers as a non-resident vendor and submits periodic filings. Sellers transacting through Whop in foreign jurisdictions may have additional obligations depending on their business structure and activities.</p>
             </div>
 
-            <!-- Compliance Infrastructure -->
             <div class="policy-section">
                 <h2>5. Compliance Infrastructure and Controls</h2>
                 <ul class="policy-list">
@@ -302,90 +297,73 @@
                 </ul>
             </div>
 
-            <!-- Ongoing Review -->
             <div class="policy-section">
                 <h2>6. Ongoing Review and Change Management</h2>
                 <p>This policy is reviewed at least annually and updated as necessary to reflect changes in law, business operations, or guidance from tax advisors. Significant legislative or operational changes (e.g., expansion into new product lines or markets) trigger interim policy reviews.</p>
-                <div class="policy-meta">
-                    <span class="policy-version">Policy Version: 1.0</span>
-                    <span class="policy-date">Last Reviewed: January 2026</span>
-                </div>
+            </div>
+        </section>
+
+        <!-- Future State Section -->
+        <section id="future-state" class="section hidden">
+            <div class="section-header">
+                <h1>Future State</h1>
+                <p class="subtitle">Tax infrastructure currently in development with Numeral</p>
             </div>
 
-            <!-- Tax Flow Diagram -->
-            <div class="policy-diagram">
-                <h2>Tax Collection Flow</h2>
-                <p class="diagram-note">How tax responsibility is determined based on transaction type</p>
+            <div class="future-state-intro">
+                <div class="partner-badge">
+                    <span class="badge-icon">N</span>
+                    <span class="badge-text">In Development with Numeral</span>
+                </div>
+                <p>Whop is building out comprehensive tax infrastructure in partnership with Numeral. The diagram below outlines how tax responsibility will be determined based on transaction type and seller preferences.</p>
+            </div>
 
-                <div class="flow-diagram">
-                    <div class="flow-header">Transaction Type?</div>
+            <div class="flow-diagram-container">
+                <h2>Tax Responsibility Flow</h2>
 
-                    <div class="flow-columns">
-                        <!-- Discover Transaction Column -->
-                        <div class="flow-column discover">
-                            <div class="flow-card-header discover">Discover Transaction</div>
-                            <div class="flow-card-body">
-                                <div class="flow-item">
-                                    <span class="flow-icon check"></span>
-                                    <div>
-                                        <strong>Whop is Responsible</strong>
-                                        <p>Whop collects and remits tax</p>
-                                    </div>
-                                </div>
-                                <div class="flow-item">
-                                    <span class="flow-icon doc"></span>
-                                    <div>
-                                        <strong>Numeral Account</strong>
-                                        <p>Uses Whop's Numeral account</p>
-                                    </div>
-                                </div>
-                                <div class="flow-item">
-                                    <span class="flow-icon invoice"></span>
-                                    <div>
-                                        <strong>Invoice</strong>
-                                        <p>Whop's information on invoice</p>
-                                    </div>
-                                </div>
-                                <div class="flow-role marketplace">Whop's Tax Role: Marketplace Provider</div>
-                            </div>
+                <div class="flow-question">Transaction Type?</div>
+
+                <div class="flow-paths">
+                    <!-- Discover Path -->
+                    <div class="flow-path discover-path">
+                        <div class="path-header discover">Discover Transaction</div>
+                        <div class="path-content">
+                            <div class="path-item"><strong>Whop is Responsible</strong> - Whop collects and remits tax</div>
+                            <div class="path-item"><strong>Numeral Account</strong> - Uses Whop's Numeral account</div>
+                            <div class="path-item"><strong>Invoice</strong> - Whop's information on invoice</div>
+                            <div class="path-role">Whop's Tax Role: <strong>Marketplace Provider</strong></div>
                         </div>
+                    </div>
 
-                        <!-- DTC Checkout Column -->
-                        <div class="flow-column dtc">
-                            <div class="flow-card-header dtc">DTC Checkout Link / Embedded Checkout</div>
-                            <div class="flow-card-body">
-                                <div class="flow-item warning">
-                                    <span class="flow-icon alert"></span>
-                                    <div>
-                                        <strong>Seller Initially Responsible</strong>
-                                        <p>Seller has 4 options to handle tax</p>
-                                    </div>
-                                </div>
+                    <!-- DTC Path -->
+                    <div class="flow-path dtc-path">
+                        <div class="path-header dtc">DTC Checkout Link / Embedded Checkout</div>
+                        <div class="path-content">
+                            <div class="path-item highlight"><strong>Seller Initially Responsible</strong> - Seller has 4 options to handle tax</div>
 
-                                <div class="flow-note">
-                                    <strong>Backend Override:</strong> Whop has the option to take on responsibility for non-Discover transactions in jurisdictions where it deems it should cover everything to be conservative.
-                                </div>
+                            <div class="override-note">
+                                <strong>Backend Override:</strong> Whop has the option to take on responsibility for non-Discover transactions in jurisdictions where it deems it should cover everything to be conservative. Overriding would result in Option 1 taking hold.
+                            </div>
 
-                                <!-- Option 1 -->
-                                <div class="flow-option">
-                                    <div class="option-header option-1">Option 1</div>
-                                    <div class="option-title">Whop as MOR/Undisclosed Agent</div>
-                                    <ul class="option-list">
+                            <div class="options-grid">
+                                <div class="option-card option-1">
+                                    <div class="option-number">Option 1</div>
+                                    <div class="option-name">Whop as MOR/Undisclosed Agent</div>
+                                    <ul>
                                         <li>Seller designates Whop to handle</li>
                                         <li>Whop collects and remits on behalf</li>
                                         <li>Whop's info on invoice</li>
                                         <li>Set when creating business</li>
                                         <li>Whop would consider charging a fee</li>
                                     </ul>
-                                    <div class="option-note warning">Requires distinct terms</div>
-                                    <div class="flow-role mor">Whop's Tax Role: Merchant of Record</div>
+                                    <div class="option-note">Note: Requires distinct terms</div>
+                                    <div class="option-role">Whop's Tax Role: <strong>Merchant of Record</strong></div>
                                 </div>
 
-                                <!-- Option 2 -->
-                                <div class="flow-option">
-                                    <div class="option-header option-2">Option 2</div>
-                                    <div class="option-title">Sync Numeral Account</div>
-                                    <ul class="option-list">
+                                <div class="option-card option-2">
+                                    <div class="option-number">Option 2</div>
+                                    <div class="option-name">Sync Numeral Account</div>
+                                    <ul>
                                         <li>Seller syncs their Numeral account</li>
                                         <li>Seller collects and remits</li>
                                         <li>Tax calculation baked in via Numeral</li>
@@ -393,15 +371,14 @@
                                         <li>Seller's info on invoice</li>
                                         <li>Seller pays Numeral any fees owed</li>
                                     </ul>
-                                    <div class="option-note info">Numeral account should be set up and integrated when they create business on Whop</div>
-                                    <div class="flow-role processor">Whop's Tax Role: Payment Processor</div>
+                                    <div class="option-note">Note: Numeral account should be set up and integrated when they create business on Whop</div>
+                                    <div class="option-role">Whop's Tax Role: <strong>Payment Processor</strong></div>
                                 </div>
 
-                                <!-- Option 3 -->
-                                <div class="flow-option">
-                                    <div class="option-header option-3">Option 3</div>
-                                    <div class="option-title">Tax Calculation Only</div>
-                                    <ul class="option-list">
+                                <div class="option-card option-3">
+                                    <div class="option-number">Option 3</div>
+                                    <div class="option-name">Tax Calculation Only</div>
+                                    <ul>
                                         <li>Tax calculation can be turned on at any time</li>
                                         <li>Calculated by Numeral backend</li>
                                         <li>No filing/remittance automation</li>
@@ -409,22 +386,21 @@
                                         <li>Seller's info on invoice</li>
                                         <li>Whop would consider charging a fee</li>
                                     </ul>
-                                    <div class="option-note warning">No Numeral account + Nexus tracking up to seller</div>
-                                    <div class="flow-role processor">Whop's Tax Role: Payment Processor</div>
+                                    <div class="option-note">Note: No Numeral account + Nexus tracking up to seller</div>
+                                    <div class="option-role">Whop's Tax Role: <strong>Payment Processor</strong></div>
                                 </div>
 
-                                <!-- Option 4 -->
-                                <div class="flow-option">
-                                    <div class="option-header option-4">Option 4</div>
-                                    <div class="option-title">No Tax Support</div>
-                                    <ul class="option-list">
+                                <div class="option-card option-4">
+                                    <div class="option-number">Option 4</div>
+                                    <div class="option-name">No Tax Support</div>
+                                    <ul>
                                         <li>No tax features enabled</li>
                                         <li>Seller still responsible per terms</li>
                                         <li>Seller handles everything manually</li>
                                         <li>Seller's info on invoice</li>
                                     </ul>
-                                    <div class="option-note error">Full manual tax management</div>
-                                    <div class="flow-role processor">Whop's Tax Role: Payment Processor</div>
+                                    <div class="option-note">Note: Full manual tax management</div>
+                                    <div class="option-role">Whop's Tax Role: <strong>Payment Processor</strong></div>
                                 </div>
                             </div>
                         </div>
