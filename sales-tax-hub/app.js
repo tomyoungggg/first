@@ -35,59 +35,68 @@ function hideLogin() {
 // Run auth check on page load
 document.addEventListener('DOMContentLoaded', checkAuth);
 
-// State Data
+// International Registrations
+const internationalRegistrations = [
+    { region: 'United Kingdom', code: 'UK', registrationId: 'GB497545239', status: 'registered', type: 'VAT' },
+    { region: 'European Union', code: 'EU', registrationId: '250151589', status: 'registered', type: 'VAT' }
+];
+
+// US State Data - Whop's actual registrations
+// States with 'registered' = Whop has active registration
+// States with 'pending' = Nexus analysis in progress with Numeral (2026 Policy)
+// States with 'not-required' = No sales tax in state
 const statesData = [
-    { name: 'Alabama', abbr: 'AL', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$250,000', transactionThreshold: null },
-    { name: 'Alaska', abbr: 'AK', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null },
-    { name: 'Arizona', abbr: 'AZ', status: 'registered', rate: '5.60%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Arkansas', abbr: 'AR', status: 'registered', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'California', abbr: 'CA', status: 'registered', rate: '7.25%', filingFreq: 'Monthly', nexusThreshold: '$500,000', transactionThreshold: null },
-    { name: 'Colorado', abbr: 'CO', status: 'registered', rate: '2.90%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Connecticut', abbr: 'CT', status: 'registered', rate: '6.35%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Delaware', abbr: 'DE', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null },
-    { name: 'Florida', abbr: 'FL', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Georgia', abbr: 'GA', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Hawaii', abbr: 'HI', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Idaho', abbr: 'ID', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Illinois', abbr: 'IL', status: 'registered', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Indiana', abbr: 'IN', status: 'registered', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Iowa', abbr: 'IA', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Kansas', abbr: 'KS', status: 'registered', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Kentucky', abbr: 'KY', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Louisiana', abbr: 'LA', status: 'registered', rate: '4.45%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Maine', abbr: 'ME', status: 'registered', rate: '5.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Maryland', abbr: 'MD', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Massachusetts', abbr: 'MA', status: 'registered', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Michigan', abbr: 'MI', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Minnesota', abbr: 'MN', status: 'registered', rate: '6.875%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Mississippi', abbr: 'MS', status: 'registered', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$250,000', transactionThreshold: null },
-    { name: 'Missouri', abbr: 'MO', status: 'registered', rate: '4.225%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Montana', abbr: 'MT', status: 'pending', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null },
-    { name: 'Nebraska', abbr: 'NE', status: 'registered', rate: '5.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Nevada', abbr: 'NV', status: 'registered', rate: '6.85%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'New Hampshire', abbr: 'NH', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null },
-    { name: 'New Jersey', abbr: 'NJ', status: 'registered', rate: '6.625%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'New Mexico', abbr: 'NM', status: 'registered', rate: '4.875%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'New York', abbr: 'NY', status: 'registered', rate: '4.00%', filingFreq: 'Quarterly', nexusThreshold: '$500,000', transactionThreshold: '100' },
-    { name: 'North Carolina', abbr: 'NC', status: 'registered', rate: '4.75%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'North Dakota', abbr: 'ND', status: 'registered', rate: '5.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Ohio', abbr: 'OH', status: 'registered', rate: '5.75%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Oklahoma', abbr: 'OK', status: 'registered', rate: '4.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Oregon', abbr: 'OR', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null },
-    { name: 'Pennsylvania', abbr: 'PA', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Rhode Island', abbr: 'RI', status: 'registered', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'South Carolina', abbr: 'SC', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'South Dakota', abbr: 'SD', status: 'registered', rate: '4.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Tennessee', abbr: 'TN', status: 'registered', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Texas', abbr: 'TX', status: 'registered', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$500,000', transactionThreshold: null },
-    { name: 'Utah', abbr: 'UT', status: 'registered', rate: '6.10%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Vermont', abbr: 'VT', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Virginia', abbr: 'VA', status: 'registered', rate: '5.30%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Washington', abbr: 'WA', status: 'registered', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'West Virginia', abbr: 'WV', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Wisconsin', abbr: 'WI', status: 'registered', rate: '5.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null },
-    { name: 'Wyoming', abbr: 'WY', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' },
-    { name: 'Washington D.C.', abbr: 'DC', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200' }
+    { name: 'Alabama', abbr: 'AL', status: 'pending', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$250,000', transactionThreshold: null, registrationId: null },
+    { name: 'Alaska', abbr: 'AK', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null, registrationId: null },
+    { name: 'Arizona', abbr: 'AZ', status: 'pending', rate: '5.60%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Arkansas', abbr: 'AR', status: 'pending', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'California', abbr: 'CA', status: 'pending', rate: '7.25%', filingFreq: 'Monthly', nexusThreshold: '$500,000', transactionThreshold: null, registrationId: null },
+    { name: 'Colorado', abbr: 'CO', status: 'pending', rate: '2.90%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Connecticut', abbr: 'CT', status: 'pending', rate: '6.35%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Delaware', abbr: 'DE', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null, registrationId: null },
+    { name: 'Florida', abbr: 'FL', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Georgia', abbr: 'GA', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '175-884128' },
+    { name: 'Hawaii', abbr: 'HI', status: 'registered', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: 'GE-207-045-5808-01' },
+    { name: 'Idaho', abbr: 'ID', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Illinois', abbr: 'IL', status: 'pending', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Indiana', abbr: 'IN', status: 'registered', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: 'RST-0007908931' },
+    { name: 'Iowa', abbr: 'IA', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Kansas', abbr: 'KS', status: 'pending', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Kentucky', abbr: 'KY', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '000712040' },
+    { name: 'Louisiana', abbr: 'LA', status: 'pending', rate: '4.45%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Maine', abbr: 'ME', status: 'pending', rate: '5.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Maryland', abbr: 'MD', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '20083924' },
+    { name: 'Massachusetts', abbr: 'MA', status: 'pending', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Michigan', abbr: 'MI', status: 'registered', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '852300246' },
+    { name: 'Minnesota', abbr: 'MN', status: 'pending', rate: '6.875%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Mississippi', abbr: 'MS', status: 'pending', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$250,000', transactionThreshold: null, registrationId: null },
+    { name: 'Missouri', abbr: 'MO', status: 'pending', rate: '4.225%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Montana', abbr: 'MT', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null, registrationId: null },
+    { name: 'Nebraska', abbr: 'NE', status: 'pending', rate: '5.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Nevada', abbr: 'NV', status: 'pending', rate: '6.85%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'New Hampshire', abbr: 'NH', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null, registrationId: null },
+    { name: 'New Jersey', abbr: 'NJ', status: 'registered', rate: '6.625%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '852300246000' },
+    { name: 'New Mexico', abbr: 'NM', status: 'pending', rate: '4.875%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'New York', abbr: 'NY', status: 'registered', rate: '4.00%', filingFreq: 'Quarterly', nexusThreshold: '$500,000', transactionThreshold: '100', registrationId: '852300246' },
+    { name: 'North Carolina', abbr: 'NC', status: 'registered', rate: '4.75%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: '601535064' },
+    { name: 'North Dakota', abbr: 'ND', status: 'pending', rate: '5.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Ohio', abbr: 'OH', status: 'pending', rate: '5.75%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Oklahoma', abbr: 'OK', status: 'pending', rate: '4.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Oregon', abbr: 'OR', status: 'not-required', rate: '0.00%', filingFreq: 'N/A', nexusThreshold: 'N/A', transactionThreshold: null, registrationId: null },
+    { name: 'Pennsylvania', abbr: 'PA', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Rhode Island', abbr: 'RI', status: 'pending', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'South Carolina', abbr: 'SC', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'South Dakota', abbr: 'SD', status: 'pending', rate: '4.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Tennessee', abbr: 'TN', status: 'pending', rate: '7.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Texas', abbr: 'TX', status: 'pending', rate: '6.25%', filingFreq: 'Monthly', nexusThreshold: '$500,000', transactionThreshold: null, registrationId: null },
+    { name: 'Utah', abbr: 'UT', status: 'pending', rate: '6.10%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Vermont', abbr: 'VT', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Virginia', abbr: 'VA', status: 'pending', rate: '5.30%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Washington', abbr: 'WA', status: 'pending', rate: '6.50%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'West Virginia', abbr: 'WV', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Wisconsin', abbr: 'WI', status: 'pending', rate: '5.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: null, registrationId: null },
+    { name: 'Wyoming', abbr: 'WY', status: 'pending', rate: '4.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null },
+    { name: 'Washington D.C.', abbr: 'DC', status: 'pending', rate: '6.00%', filingFreq: 'Monthly', nexusThreshold: '$100,000', transactionThreshold: '200', registrationId: null }
 ];
 
 // Digital product taxability by state (simplified)
@@ -145,11 +154,66 @@ const taxabilityRules = {
 // Initialize app
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
+    populateRegistrations();
     populateStates();
     populateStateDropdowns();
     initSearch();
     initFilters();
 });
+
+// Populate Registrations Tab
+function populateRegistrations() {
+    // Active US Registrations
+    const activeGrid = document.getElementById('activeRegistrationsGrid');
+    if (activeGrid) {
+        const registeredStates = statesData.filter(s => s.status === 'registered');
+        activeGrid.innerHTML = registeredStates.map(state => `
+            <div class="registration-card">
+                <div class="registration-header">
+                    <span class="registration-name">${state.name}</span>
+                    <span class="registration-abbr">${state.abbr}</span>
+                </div>
+                <div class="registration-details">
+                    <div class="registration-row">
+                        <span class="registration-label">Registration ID</span>
+                        <span class="registration-value">${state.registrationId}</span>
+                    </div>
+                    <div class="registration-row">
+                        <span class="registration-label">State Tax Rate</span>
+                        <span class="registration-value">${state.rate}</span>
+                    </div>
+                    <div class="registration-row">
+                        <span class="registration-label">Filing Frequency</span>
+                        <span class="registration-value">${state.filingFreq}</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // International Registrations
+    const intlGrid = document.getElementById('internationalGrid');
+    if (intlGrid) {
+        intlGrid.innerHTML = internationalRegistrations.map(reg => `
+            <div class="international-card registration-card">
+                <div class="registration-header">
+                    <span class="registration-name">${reg.region}</span>
+                    <span class="registration-abbr">${reg.code}</span>
+                </div>
+                <div class="registration-details">
+                    <div class="registration-row">
+                        <span class="registration-label">${reg.type} Number</span>
+                        <span class="registration-value">${reg.registrationId}</span>
+                    </div>
+                    <div class="registration-row">
+                        <span class="registration-label">Status</span>
+                        <span class="registration-value" style="color: var(--success-color);">Active</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+}
 
 // Navigation
 function initNavigation() {
@@ -213,6 +277,12 @@ function populateStates(filter = 'all', search = '') {
                 <span class="state-status ${state.status}">${formatStatus(state.status)}</span>
             </div>
             <div class="state-details">
+                ${state.registrationId ? `
+                <div class="state-detail">
+                    <span class="state-detail-label">Whop Registration ID</span>
+                    <span class="state-detail-value" style="font-family: monospace;">${state.registrationId}</span>
+                </div>
+                ` : ''}
                 <div class="state-detail">
                     <span class="state-detail-label">State Tax Rate</span>
                     <span class="state-detail-value">${state.rate}</span>

@@ -32,6 +32,7 @@
             </div>
             <div class="nav-links">
                 <a href="#dashboard" class="nav-link active">Dashboard</a>
+                <a href="#registrations" class="nav-link">Registrations</a>
                 <a href="#states" class="nav-link">State Directory</a>
                 <a href="#resources" class="nav-link">Resources</a>
                 <a href="#tools" class="nav-link">Tools</a>
@@ -65,8 +66,8 @@
                         </svg>
                     </div>
                     <div class="stat-content">
-                        <span class="stat-value" id="statesRegistered">45</span>
-                        <span class="stat-label">States Registered</span>
+                        <span class="stat-value" id="statesRegistered">9</span>
+                        <span class="stat-label">US States Registered</span>
                     </div>
                 </div>
                 <div class="stat-card">
@@ -230,6 +231,81 @@
                             <a href="#" class="update-link">Read more →</a>
                         </div>
                     </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registrations Section -->
+        <section id="registrations" class="section hidden">
+            <div class="section-header">
+                <h1>Whop Tax Registrations</h1>
+                <p class="subtitle">Where Whop is registered to collect and remit sales tax</p>
+            </div>
+
+            <!-- Registration Summary -->
+            <div class="registration-summary">
+                <div class="summary-stat">
+                    <span class="summary-number">9</span>
+                    <span class="summary-label">US States</span>
+                </div>
+                <div class="summary-stat">
+                    <span class="summary-number">2</span>
+                    <span class="summary-label">International</span>
+                </div>
+                <div class="summary-stat pending-stat">
+                    <span class="summary-number">36</span>
+                    <span class="summary-label">Pending Analysis</span>
+                </div>
+            </div>
+
+            <!-- Active Registrations -->
+            <div class="registrations-section">
+                <h2>Active US Registrations</h2>
+                <p class="section-desc">These are the states where Whop has active tax registrations and can collect tax for Whop or potentially for sellers if that arrangement is supported.</p>
+                <div class="registrations-grid" id="activeRegistrationsGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- International Registrations -->
+            <div class="registrations-section">
+                <h2>International Registrations</h2>
+                <p class="section-desc">Whop's VAT registrations for international tax collection.</p>
+                <div class="international-grid" id="internationalGrid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Pending Analysis Callout -->
+            <div class="nexus-callout">
+                <div class="callout-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" y1="16" x2="12" y2="12"></line>
+                        <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                    </svg>
+                </div>
+                <div class="callout-content">
+                    <h3>Why aren't other states listed?</h3>
+                    <p>Whop is currently running a <strong>nexus analysis with Numeral</strong> based on our 2026 Policy. This analysis will evaluate which additional states we have tax exposure in before registering.</p>
+                    <p>States are marked as "Pending" in the State Directory until this analysis is complete and registration decisions are made.</p>
+                    <div class="callout-meta">
+                        <span class="callout-tag">In Progress</span>
+                        <span class="callout-partner">Partner: Numeral</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- States Without Sales Tax -->
+            <div class="no-tax-section">
+                <h3>States Without Sales Tax</h3>
+                <p>These states do not have a general sales tax, so no registration is required:</p>
+                <div class="no-tax-states">
+                    <span class="no-tax-badge">Alaska (AK)</span>
+                    <span class="no-tax-badge">Delaware (DE)</span>
+                    <span class="no-tax-badge">Montana (MT)</span>
+                    <span class="no-tax-badge">New Hampshire (NH)</span>
+                    <span class="no-tax-badge">Oregon (OR)</span>
                 </div>
             </div>
         </section>
