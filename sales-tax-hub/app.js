@@ -163,12 +163,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Populate Registrations Tab
 function populateRegistrations() {
-    // Active US Registrations
+    // Active US Registrations (all currently NOT collecting)
     const activeGrid = document.getElementById('activeRegistrationsGrid');
     if (activeGrid) {
         const registeredStates = statesData.filter(s => s.status === 'registered');
         activeGrid.innerHTML = registeredStates.map(state => `
-            <div class="registration-card">
+            <div class="registration-card not-collecting">
                 <div class="registration-header">
                     <span class="registration-name">${state.name}</span>
                     <span class="registration-abbr">${state.abbr}</span>
@@ -178,24 +178,20 @@ function populateRegistrations() {
                         <span class="registration-label">Registration ID</span>
                         <span class="registration-value">${state.registrationId}</span>
                     </div>
-                    <div class="registration-row">
-                        <span class="registration-label">State Tax Rate</span>
-                        <span class="registration-value">${state.rate}</span>
-                    </div>
-                    <div class="registration-row">
-                        <span class="registration-label">Filing Frequency</span>
-                        <span class="registration-value">${state.filingFreq}</span>
-                    </div>
+                </div>
+                <div class="collection-status not-collecting">
+                    <span class="status-dot"></span>
+                    Not Collecting
                 </div>
             </div>
         `).join('');
     }
 
-    // International Registrations
+    // International Registrations (UK and EU ARE collecting)
     const intlGrid = document.getElementById('internationalGrid');
     if (intlGrid) {
         intlGrid.innerHTML = internationalRegistrations.map(reg => `
-            <div class="international-card registration-card">
+            <div class="international-card registration-card collecting">
                 <div class="registration-header">
                     <span class="registration-name">${reg.region}</span>
                     <span class="registration-abbr">${reg.code}</span>
@@ -205,10 +201,10 @@ function populateRegistrations() {
                         <span class="registration-label">${reg.type} Number</span>
                         <span class="registration-value">${reg.registrationId}</span>
                     </div>
-                    <div class="registration-row">
-                        <span class="registration-label">Status</span>
-                        <span class="registration-value" style="color: var(--success-color);">Active</span>
-                    </div>
+                </div>
+                <div class="collection-status collecting">
+                    <span class="status-dot"></span>
+                    Collecting
                 </div>
             </div>
         `).join('');

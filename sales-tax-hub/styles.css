@@ -1477,3 +1477,56 @@ body {
     font-size: 13px;
     font-weight: 500;
 }
+
+/* Collection Status Badge */
+.collection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.collection-status .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.collection-status.collecting {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.collection-status.collecting .status-dot {
+    background: #047857;
+}
+
+.collection-status.not-collecting {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.collection-status.not-collecting .status-dot {
+    background: #b45309;
+}
+
+/* Adjust card borders based on collection status */
+.registration-card.not-collecting {
+    border-color: #f59e0b;
+}
+
+.registration-card.not-collecting::before {
+    background: #f59e0b;
+}
+
+.registration-card.collecting {
+    border-color: var(--success-color);
+}
+
+.registration-card.collecting::before {
+    background: var(--success-color);
+}
