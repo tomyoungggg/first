@@ -1971,3 +1971,130 @@ body {
     max-height: 600px;
     overflow-y: auto;
 }
+
+/* Taxability Legend */
+.taxability-legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    padding: 16px 20px;
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.legend-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.legend-badge.taxable {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.legend-badge.not-taxable {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.legend-badge.exempt {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.legend-badge.partial {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+/* Product Codes Grid */
+.product-codes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+}
+
+.product-code-card {
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+.product-code-name {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.product-code-card p {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Tax Matrix Table Cell Colors */
+.tax-matrix-table td {
+    text-align: center;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.tax-matrix-table td.t {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+.tax-matrix-table td.nt {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.tax-matrix-table td.e {
+    background: #dbeafe;
+    color: #2563eb;
+}
+
+.tax-matrix-table td.t80 {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.tax-matrix-table td.sticky-col {
+    position: sticky;
+    left: 0;
+    background: #f1f5f9;
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: left;
+    z-index: 1;
+}
+
+.tax-matrix-table th.sticky-col {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+}
+
+.tax-matrix-table tr:hover td.sticky-col {
+    background: #e2e8f0;
+}

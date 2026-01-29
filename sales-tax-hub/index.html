@@ -302,25 +302,127 @@
                 <p class="subtitle">Product codes and jurisdiction tax matrices</p>
             </div>
 
-            <div class="taxability-intro">
-                <p>This section contains the product taxability matrices that define how different product types are taxed across jurisdictions. These matrices are used to determine the correct tax treatment for each transaction.</p>
+            <!-- Legend -->
+            <div class="taxability-legend">
+                <div class="legend-item"><span class="legend-badge taxable">T</span> Taxable</div>
+                <div class="legend-item"><span class="legend-badge not-taxable">NT</span> Not Taxable</div>
+                <div class="legend-item"><span class="legend-badge exempt">E</span> Exempt</div>
+                <div class="legend-item"><span class="legend-badge partial">T80%</span> Taxable at 80%</div>
             </div>
 
             <!-- Product Codes Section -->
             <div class="taxability-section">
-                <h2>Product Codes</h2>
-                <p class="section-desc">Product tax codes used to categorize items for tax calculation purposes.</p>
-                <div class="matrix-placeholder" id="productCodesMatrix">
-                    <p>Product codes matrix will be displayed here.</p>
+                <h2>Product Categories</h2>
+                <p class="section-desc">Definitions of product types used for tax classification.</p>
+                <div class="product-codes-grid">
+                    <div class="product-code-card">
+                        <div class="product-code-name">Online Group Chat</div>
+                        <p>This is an online chat group (e.g., Discord-style community access).</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">Live</div>
+                        <p>A live streamed event viewable only on the internet.</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">Prerecorded (Permanent Link)</div>
+                        <p>A prerecorded event only available by streaming. The user pays once and receives a permanent link to view the stream.</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">Prerecorded (Continued Payment)</div>
+                        <p>A prerecorded event only available by streaming. The user must pay an ongoing fee for continued access, or access expires after a specific period of time.</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">Digital Newsletter</div>
+                        <p>This is a newsletter delivered electronically.</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">SaaS B2C</div>
+                        <p>This is access to a software application provided over the internet sold to a general consumer.</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">General Merchandise</div>
+                        <p>These are hard goods (physical products).</p>
+                    </div>
+                    <div class="product-code-card">
+                        <div class="product-code-name">Consulting (Business)</div>
+                        <p>This is one on one consulting or coaching that is directed at the buyer's core business activity.</p>
+                    </div>
                 </div>
             </div>
 
             <!-- Jurisdiction Matrix Section -->
             <div class="taxability-section">
                 <h2>Jurisdiction Matrix</h2>
-                <p class="section-desc">Tax treatment by jurisdiction showing which product types are taxable in each location.</p>
-                <div class="matrix-placeholder" id="jurisdictionMatrix">
-                    <p>Jurisdiction matrix will be displayed here.</p>
+                <p class="section-desc">Tax treatment by jurisdiction showing which product types are taxable in each location. Click on any cell to see details.</p>
+                <div class="matrix-scroll-container">
+                    <table class="tax-matrix-table" id="jurisdictionMatrix">
+                        <thead>
+                            <tr>
+                                <th class="sticky-col">State</th>
+                                <th>Online Group Chat</th>
+                                <th>Live</th>
+                                <th>Prerecorded (Permanent)</th>
+                                <th>Prerecorded (Subscription)</th>
+                                <th>Digital Newsletter</th>
+                                <th>SaaS B2C</th>
+                                <th>General Merch</th>
+                                <th>Consulting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td class="sticky-col">AL</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">AK</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">AZ</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">AR</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">CA</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">CO</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">CT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr><td class="sticky-col">DE</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">DC</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">FL</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">GA</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="e">E</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">HI</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr><td class="sticky-col">ID</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">IL</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">IN</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">IA</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">KS</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">KY</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">LA</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">ME</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="e">E</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MD</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MA</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MI</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MN</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MS</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MO</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">MT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NE</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NV</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NH</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NJ</td><td class="nt">NT</td><td class="e">E</td><td class="e">E</td><td class="e">E</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NM</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr><td class="sticky-col">NY</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">NC</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">ND</td><td class="nt">NT</td><td class="e">E</td><td class="e">E</td><td class="e">E</td><td class="e">E</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">OH</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">OK</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">OR</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">PA</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">RI</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">SC</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">SD</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr><td class="sticky-col">TN</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">TX</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t80">T80%</td><td class="t80">T80%</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">UT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">VT</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">VA</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">WA</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">WV</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr><td class="sticky-col">WI</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                            <tr><td class="sticky-col">WY</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </section>
