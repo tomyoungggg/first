@@ -2427,3 +2427,342 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+/* ============================================
+   Seller Terms Link (Policy Section)
+   ============================================ */
+
+.seller-terms-link {
+    margin-bottom: 24px;
+}
+
+.seller-terms-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+    border: 1px solid #86efac;
+    border-radius: var(--radius-lg);
+    color: #166534;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.seller-terms-link a:hover {
+    background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+    box-shadow: var(--shadow-sm);
+}
+
+.seller-terms-link svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.seller-terms-link .external-icon {
+    width: 14px;
+    height: 14px;
+    opacity: 0.7;
+}
+
+/* ============================================
+   International Taxability Section
+   ============================================ */
+
+.intl-taxability {
+    background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+    border: 2px solid var(--primary-color);
+}
+
+.intl-tax-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 20px;
+}
+
+.intl-tax-card {
+    background: white;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.intl-tax-card.uk {
+    border-top: 4px solid #1e40af;
+}
+
+.intl-tax-card.eu {
+    border-top: 4px solid #003399;
+}
+
+.intl-tax-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tax-status-badge {
+    margin-left: auto;
+    padding: 4px 12px;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.intl-tax-body {
+    padding: 20px;
+}
+
+.intl-tax-body p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.intl-tax-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.intl-tax-grid span {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.intl-tax-grid span.t {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+/* ============================================
+   Timeline Section Styles
+   ============================================ */
+
+.timeline-container {
+    position: relative;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 0;
+}
+
+.timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    width: 32px;
+}
+
+.timeline-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--border-color);
+    border: 3px solid white;
+    box-shadow: 0 0 0 2px var(--border-color);
+    z-index: 1;
+}
+
+.timeline-dot.active {
+    background: var(--primary-color);
+    box-shadow: 0 0 0 2px var(--primary-color);
+}
+
+.timeline-line {
+    width: 2px;
+    flex: 1;
+    background: var(--border-color);
+    margin: 8px 0;
+}
+
+.timeline-content {
+    flex: 1;
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.timeline-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 20px;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+}
+
+.timeline-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.timeline-badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.owner-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.owner-badge.finance {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.owner-badge.product {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.owner-badge.numeral {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.partner-badge-sm {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: var(--text-secondary);
+}
+
+.timeline-body {
+    padding: 20px;
+}
+
+.timeline-body p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0 0 16px 0;
+}
+
+.timeline-note {
+    padding: 12px 16px;
+    background: #fefce8;
+    border: 1px solid #fde047;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    color: #854d0e;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.timeline-note strong {
+    color: #713f12;
+}
+
+.timeline-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 16px 0;
+}
+
+.timeline-list li {
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    background: #f8fafc;
+    border-radius: var(--radius-md);
+    border-left: 3px solid var(--primary-color);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.timeline-list li:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-list li strong {
+    color: var(--text-primary);
+}
+
+.timeline-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.timeline-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.timeline-status.in-progress {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.timeline-status.in-progress::before {
+    background: #1e40af;
+}
+
+.timeline-status.pending {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.timeline-status.pending::before {
+    background: #b45309;
+}
+
+.timeline-status.ongoing {
+    background: #d1fae5;
+    color: #047857;
+}
+
+.timeline-status.ongoing::before {
+    background: #047857;
+}
+
+@media (max-width: 768px) {
+    .timeline-item {
+        gap: 16px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .intl-tax-cards {
+        grid-template-columns: 1fr;
+    }
+}

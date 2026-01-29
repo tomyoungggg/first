@@ -35,7 +35,7 @@
                 <a href="#implementation" class="nav-link">Implementation</a>
                 <a href="#taxability" class="nav-link">Taxability</a>
                 <a href="#registrations" class="nav-link">Registrations</a>
-                <a href="#resources" class="nav-link">Resources</a>
+                <a href="#timeline" class="nav-link">Timeline</a>
             </div>
             <div class="nav-search">
                 <input type="text" placeholder="Search..." id="globalSearch">
@@ -53,6 +53,21 @@
             <div class="section-header">
                 <h1>Whop Indirect Tax Policy</h1>
                 <p class="subtitle">In collaboration with its tax advisor, Deloitte Tax LLP, Whop has prepared the following Indirect Tax Policy document to guide its approach to indirect taxes.</p>
+            </div>
+
+            <div class="seller-terms-link">
+                <a href="https://whop.com/seller-terms/" target="_blank">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                    </svg>
+                    See Taxes section in Seller Terms
+                    <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                </a>
             </div>
 
             <div class="policy-section">
@@ -421,10 +436,56 @@
                 </div>
             </div>
 
-            <!-- Jurisdiction Matrix Section -->
+            <!-- International Taxability Section -->
+            <div class="taxability-section intl-taxability">
+                <h2>International Taxability (UK & EU)</h2>
+                <p class="section-desc">All digital products sold through Whop are classified as <strong>Electronically Supplied Services (ESS)</strong> in the UK and EU, making all product categories subject to VAT.</p>
+
+                <div class="intl-tax-cards">
+                    <div class="intl-tax-card uk">
+                        <div class="intl-tax-header">
+                            <span class="region-badge uk">UK</span>
+                            <span class="tax-status-badge">All Products Taxable</span>
+                        </div>
+                        <div class="intl-tax-body">
+                            <p>VAT applies to all product categories when buyers are located in the United Kingdom. Products are classified as ESS under UK VAT rules.</p>
+                            <div class="intl-tax-grid">
+                                <span class="t">Online Group Chat</span>
+                                <span class="t">Live</span>
+                                <span class="t">Prerecorded</span>
+                                <span class="t">Digital Newsletter</span>
+                                <span class="t">SaaS B2C</span>
+                                <span class="t">General Merch</span>
+                                <span class="t">Consulting</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="intl-tax-card eu">
+                        <div class="intl-tax-header">
+                            <span class="region-badge eu">EU</span>
+                            <span class="tax-status-badge">All Products Taxable</span>
+                        </div>
+                        <div class="intl-tax-body">
+                            <p>VAT applies to all product categories when buyers are located in the European Union. Products are classified as ESS under EU VAT rules.</p>
+                            <div class="intl-tax-grid">
+                                <span class="t">Online Group Chat</span>
+                                <span class="t">Live</span>
+                                <span class="t">Prerecorded</span>
+                                <span class="t">Digital Newsletter</span>
+                                <span class="t">SaaS B2C</span>
+                                <span class="t">General Merch</span>
+                                <span class="t">Consulting</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- US Jurisdiction Matrix Section -->
             <div class="taxability-section">
-                <h2>Jurisdiction Matrix</h2>
-                <p class="section-desc">Tax treatment by jurisdiction showing which product types are taxable in each location. Click on any cell to see details.</p>
+                <h2>US Jurisdiction Matrix</h2>
+                <p class="section-desc">Tax treatment by US state showing which product types are taxable in each location.</p>
                 <div class="matrix-scroll-container">
                     <table class="tax-matrix-table" id="jurisdictionMatrix">
                         <thead>
@@ -492,146 +553,149 @@
                             <tr><td class="sticky-col">WV</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
                             <tr><td class="sticky-col">WI</td><td class="nt">NT</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
                             <tr><td class="sticky-col">WY</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td><td class="nt">NT</td><td class="nt">NT</td><td class="t">T</td><td class="nt">NT</td></tr>
-                            <tr class="international-row"><td class="sticky-col intl">UK</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
-                            <tr class="international-row"><td class="sticky-col intl">EU</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
         </section>
 
-        <!-- Resources Section -->
-        <section id="resources" class="section hidden">
+        <!-- Timeline Section -->
+        <section id="timeline" class="section hidden">
             <div class="section-header">
-                <h1>Resources</h1>
-                <p class="subtitle">Documentation, invoicing, and frequently asked questions</p>
+                <h1>Implementation Timeline</h1>
+                <p class="subtitle">Roadmap for Whop's tax infrastructure rollout</p>
             </div>
 
-            <div class="resources-grid">
-                <!-- Terms -->
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                            <polyline points="10 9 9 9 8 9"></polyline>
-                        </svg>
+            <div class="timeline-container">
+                <!-- Workstream 1: EU/UK Filings -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot active"></div>
+                        <div class="timeline-line"></div>
                     </div>
-                    <h3>Seller Terms of Service</h3>
-                    <p>Review the complete Whop Seller Terms of Service, including tax responsibility provisions.</p>
-                    <a href="https://whop.com/seller-terms/" target="_blank" class="resource-link">
-                        View Seller Terms
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                    </a>
-                </div>
-
-                <!-- Receipts & Invoices -->
-                <div class="resource-card">
-                    <div class="resource-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="12" y1="18" x2="12" y2="12"></line>
-                            <line x1="9" y1="15" x2="15" y2="15"></line>
-                        </svg>
-                    </div>
-                    <h3>Receipts & Invoices</h3>
-                    <p>Information about tax documentation for transactions on Whop.</p>
-                    <div class="resource-details">
-                        <div class="resource-detail-item">
-                            <strong>Discover Transactions:</strong> Receipts and tax invoices are automatically generated by Whop and include Whop's tax registration information.
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>EU & UK Outstanding Filings</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge finance">Finance</span>
+                                <span class="partner-badge-sm">Deloitte</span>
+                            </div>
                         </div>
-                        <div class="resource-detail-item">
-                            <strong>DTC Transactions (Whop-Managed):</strong> When Whop collects tax on behalf of sellers, invoices identify Whop as the party handling indirect tax.
-                        </div>
-                        <div class="resource-detail-item">
-                            <strong>DTC Transactions (Seller-Managed):</strong> Sellers are responsible for issuing their own tax-compliant invoices with their own tax registration information.
-                        </div>
-                        <div class="resource-detail-item">
-                            <strong>UK/EU VAT:</strong> Tax invoices for UK and EU transactions are administered through Stripe and Taxually, with Whop identified as the party handling indirect tax.
+                        <div class="timeline-body">
+                            <p>Handle outstanding VAT filings for EU and UK under the current framework, where tax was collected across all Whop Payments transactions with all products classified as ESS (Electronically Supplied Services).</p>
+                            <div class="timeline-status in-progress">In Progress</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- FAQs Section -->
-            <div class="faq-section">
-                <h2>Frequently Asked Questions</h2>
-
-                <div class="faq-grid">
-                    <div class="faq-item">
-                        <div class="faq-question">Who is responsible for collecting sales tax on Whop transactions?</div>
-                        <div class="faq-answer">
-                            It depends on the transaction type. For <strong>Discover transactions</strong> (marketplace sales), Whop is responsible for collecting and remitting tax in jurisdictions where it is registered. For <strong>DTC transactions</strong> (direct checkout links, embedded checkout), sellers are initially responsible, but may elect to have Whop handle tax collection on their behalf.
+                <!-- Workstream 2: US Nexus Study -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot active"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>US Nexus Study</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge numeral">Numeral</span>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Complete comprehensive nexus analysis with Numeral to determine which additional US states Whop has tax exposure in and should register with.</p>
+                            <div class="timeline-status in-progress">In Progress</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">What is a marketplace facilitator?</div>
-                        <div class="faq-answer">
-                            A marketplace facilitator is a platform that facilitates sales on behalf of third-party sellers. Under US state laws, marketplace facilitators are typically required to collect and remit sales tax on qualifying marketplace sales. Whop acts as a marketplace facilitator for transactions that occur through the Discover platform.
+                <!-- Workstream 3: Numeral Go-Live -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Numeral Integration Go-Live</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge finance">Finance</span>
+                                <span class="owner-badge product">Product</span>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Launch Numeral integration in the UK and all actively registered US states. Implementation of the Discover-only tax framework where Whop collects tax on marketplace transactions.</p>
+                            <div class="timeline-note">
+                                <strong>EU Consideration:</strong> EU go-live timing depends on OSS registration requirements. Numeral may require Ireland OSS registration, whereas Whop currently uses French OSS. If migration is not feasible, EU VAT may continue under the current all-transaction framework rather than transitioning to Discover-only.
+                            </div>
+                            <div class="timeline-status pending">Pending</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">Does Whop collect VAT on international transactions?</div>
-                        <div class="faq-answer">
-                            Yes. Whop currently collects VAT on all transactions (Discover and non-Discover) when buyers are located in the <strong>United Kingdom</strong> or <strong>European Union</strong> and the transaction is processed via Whop Payments. This is administered through Stripe and Taxually.
+                <!-- Workstream 4: State Registrations -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>State Registrations & VDAs</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge numeral">Numeral</span>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Based on the nexus study results, initiate new state registrations or enter Voluntary Disclosure Agreements (VDAs) as necessary to come into compliance.</p>
+                            <div class="timeline-note">
+                                <strong>Note:</strong> VDA processes can take several months to complete before Whop can fully support tax collection in those states.
+                            </div>
+                            <div class="timeline-status pending">Pending</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">What products are taxable in the UK and EU?</div>
-                        <div class="faq-answer">
-                            All digital products sold through Whop are classified as <strong>Electronically Supplied Services (ESS)</strong> in the UK and EU. This means all product categories—including online group chats, live streams, prerecorded content, digital newsletters, SaaS, and consulting—are subject to VAT when sold to buyers in these regions.
+                <!-- Workstream 5: Seller Tools -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-line"></div>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Seller Tax Tools</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge product">Product</span>
+                                <span class="owner-badge numeral">Numeral</span>
+                            </div>
+                        </div>
+                        <div class="timeline-body">
+                            <p>For states where Whop actively supports tax collection, offer sellers two key capabilities:</p>
+                            <ul class="timeline-list">
+                                <li><strong>Tax Calculation Services:</strong> Sellers can enable tax calculation in their business dashboard, with a Tax Module showing where they've achieved nexus and where they should toggle on tax calculation to get registered and start collecting.</li>
+                                <li><strong>Numeral Account Syncing:</strong> Sellers who want to handle their own tax can sync their own Numeral account to track nexus and manage filings through their Numeral dashboard.</li>
+                            </ul>
+                            <div class="timeline-status pending">Pending</div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="faq-item">
-                        <div class="faq-question">How do I know if my product is taxable in a specific US state?</div>
-                        <div class="faq-answer">
-                            Check the <strong>Taxability</strong> tab to see the jurisdiction matrix, which shows tax treatment by state and product category. Note that taxability varies significantly by state—some states tax digital goods broadly, while others have narrow exemptions for specific digital products.
-                        </div>
+                <!-- Workstream 6: Expansion -->
+                <div class="timeline-item">
+                    <div class="timeline-marker">
+                        <div class="timeline-dot"></div>
                     </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">What is Numeral and how does it relate to Whop's tax infrastructure?</div>
-                        <div class="faq-answer">
-                            Numeral is Whop's core indirect tax compliance platform. Whop has engaged Numeral to support tax calculation, threshold monitoring, transaction classification, and filing/remittance for both Whop-managed and seller-managed tax compliance scenarios. Sellers can also connect their own Numeral accounts to manage their tax obligations directly.
+                    <div class="timeline-content">
+                        <div class="timeline-header">
+                            <h3>Continued State Expansion</h3>
+                            <div class="timeline-badges">
+                                <span class="owner-badge finance">Finance</span>
+                                <span class="owner-badge numeral">Numeral</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">Can sellers opt to have Whop handle their tax collection for DTC sales?</div>
-                        <div class="faq-answer">
-                            Yes. Sellers can designate Whop to handle tax collection and remittance for DTC transactions under a Merchant of Record arrangement. This is configured when creating a business on Whop. Whop may charge a fee for this service. See the <strong>Implementation</strong> tab for details on all available options.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">Why doesn't Whop collect tax in all US states?</div>
-                        <div class="faq-answer">
-                            Whop only collects tax in states where it has established nexus (tax presence) and is registered. Whop is currently conducting a nexus analysis with Numeral to determine additional registration requirements. See the <strong>Registrations</strong> tab for the current list of registered states.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">What happens if I sell a product that's not taxable in a buyer's state?</div>
-                        <div class="faq-answer">
-                            If a product is classified as non-taxable (NT) or exempt (E) in a jurisdiction, no sales tax will be collected on that transaction for that jurisdiction. The taxability determination is made based on the product category and the buyer's location.
-                        </div>
-                    </div>
-
-                    <div class="faq-item">
-                        <div class="faq-question">Where can I find Whop's complete indirect tax policy?</div>
-                        <div class="faq-answer">
-                            The complete Whop Indirect Tax Policy, developed in collaboration with Deloitte Tax LLP, is available in the <strong>Policy</strong> tab of this hub. It covers tax responsibility allocation, US sales tax, foreign indirect tax, compliance infrastructure, and change management procedures.
+                        <div class="timeline-body">
+                            <p>Continue adding state registrations to offer a more comprehensive white-labeled tax solution for sellers, and ultimately for platforms using Whop as infrastructure.</p>
+                            <div class="timeline-status ongoing">Ongoing</div>
                         </div>
                     </div>
                 </div>
