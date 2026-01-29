@@ -413,7 +413,7 @@
             </div>
 
             <!-- Product Codes Section -->
-            <div class="taxability-section">
+            <div class="taxability-section featured-section">
                 <h2>Product Categories</h2>
                 <p class="section-desc">Definitions of product types used for tax classification.</p>
                 <div class="product-codes-grid">
@@ -453,53 +453,35 @@
             </div>
 
             <!-- International Taxability Section -->
-            <div class="taxability-section intl-taxability">
+            <div class="taxability-section featured-section intl-taxability">
                 <h2>International Taxability (UK & EU)</h2>
                 <p class="section-desc">All digital products sold through Whop are classified as <strong>Electronically Supplied Services (ESS)</strong> in the UK and EU, making all product categories subject to VAT.</p>
 
-                <div class="intl-tax-cards">
-                    <div class="intl-tax-card uk">
-                        <div class="intl-tax-header">
-                            <span class="region-badge uk">UK</span>
-                            <span class="tax-status-badge">All Products Taxable</span>
-                        </div>
-                        <div class="intl-tax-body">
-                            <p>VAT applies to all product categories when buyers are located in the United Kingdom. Products are classified as ESS under UK VAT rules.</p>
-                            <div class="intl-tax-grid">
-                                <span class="t">Online Group Chat</span>
-                                <span class="t">Live</span>
-                                <span class="t">Prerecorded</span>
-                                <span class="t">Digital Newsletter</span>
-                                <span class="t">SaaS B2C</span>
-                                <span class="t">General Merch</span>
-                                <span class="t">Consulting</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="intl-tax-card eu">
-                        <div class="intl-tax-header">
-                            <span class="region-badge eu">EU</span>
-                            <span class="tax-status-badge">All Products Taxable</span>
-                        </div>
-                        <div class="intl-tax-body">
-                            <p>VAT applies to all product categories when buyers are located in the European Union. Products are classified as ESS under EU VAT rules.</p>
-                            <div class="intl-tax-grid">
-                                <span class="t">Online Group Chat</span>
-                                <span class="t">Live</span>
-                                <span class="t">Prerecorded</span>
-                                <span class="t">Digital Newsletter</span>
-                                <span class="t">SaaS B2C</span>
-                                <span class="t">General Merch</span>
-                                <span class="t">Consulting</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="matrix-scroll-container">
+                    <table class="tax-matrix-table intl-matrix">
+                        <thead>
+                            <tr>
+                                <th class="sticky-col">Region</th>
+                                <th>Online Group Chat</th>
+                                <th>Live</th>
+                                <th>Prerecorded (Permanent)</th>
+                                <th>Prerecorded (Subscription)</th>
+                                <th>Digital Newsletter</th>
+                                <th>SaaS B2C</th>
+                                <th>General Merch</th>
+                                <th>Consulting</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="intl-row uk-row"><td class="sticky-col intl-label uk">UK</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                            <tr class="intl-row eu-row"><td class="sticky-col intl-label eu">EU</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td><td class="t">T</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
 
             <!-- US Jurisdiction Matrix Section -->
-            <div class="taxability-section">
+            <div class="taxability-section featured-section us-matrix">
                 <h2>US Jurisdiction Matrix</h2>
                 <p class="section-desc">Tax treatment by US state showing which product types are taxable in each location.</p>
                 <div class="matrix-scroll-container">
