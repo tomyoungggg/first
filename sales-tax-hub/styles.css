@@ -1870,3 +1870,104 @@ body {
     color: #0369a1;
     text-align: center;
 }
+
+/* ============================================
+   Taxability Section Styles
+   ============================================ */
+
+.taxability-intro {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.taxability-intro p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.taxability-section {
+    background: var(--card-background);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.taxability-section h2 {
+    color: var(--text-primary);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.taxability-section .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.matrix-placeholder {
+    background: #f8fafc;
+    border: 2px dashed var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 40px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+/* Taxability Table Styles */
+.tax-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.tax-matrix-table th,
+.tax-matrix-table td {
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+}
+
+.tax-matrix-table th {
+    background: #f1f5f9;
+    font-weight: 600;
+    color: var(--text-primary);
+    position: sticky;
+    top: 0;
+}
+
+.tax-matrix-table tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+.tax-matrix-table tr:hover {
+    background: #eef2ff;
+}
+
+.tax-status-taxable {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.tax-status-exempt {
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.tax-status-varies {
+    color: #d97706;
+    font-weight: 500;
+}
+
+.matrix-scroll-container {
+    overflow-x: auto;
+    max-height: 600px;
+    overflow-y: auto;
+}

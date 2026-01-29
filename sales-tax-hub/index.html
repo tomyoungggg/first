@@ -31,13 +31,10 @@
                 <span class="brand-text">Sales Tax Hub</span>
             </div>
             <div class="nav-links">
-                <a href="#dashboard" class="nav-link active">Dashboard</a>
-                <a href="#policy" class="nav-link">Policy</a>
+                <a href="#policy" class="nav-link active">Policy</a>
                 <a href="#future-state" class="nav-link">Future State</a>
+                <a href="#taxability" class="nav-link">Taxability</a>
                 <a href="#registrations" class="nav-link">Registrations</a>
-                <a href="#states" class="nav-link">State Directory</a>
-                <a href="#resources" class="nav-link">Resources</a>
-                <a href="#tools" class="nav-link">Tools</a>
                 <a href="#contacts" class="nav-link">Contacts</a>
             </div>
             <div class="nav-search">
@@ -51,194 +48,8 @@
     </nav>
 
     <main class="main-content">
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="section">
-            <div class="section-header">
-                <h1>Sales Tax Dashboard</h1>
-                <p class="subtitle">Your central hub for all things sales tax at Whop</p>
-            </div>
-
-            <!-- Quick Stats -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon blue">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value" id="statesRegistered">9</span>
-                        <span class="stat-label">US States Registered</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon green">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">$2.4M</span>
-                        <span class="stat-label">YTD Tax Collected</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon purple">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value" id="nextFiling">Feb 20</span>
-                        <span class="stat-label">Next Filing Due</span>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                            <line x1="16" y1="13" x2="8" y2="13"></line>
-                            <line x1="16" y1="17" x2="8" y2="17"></line>
-                        </svg>
-                    </div>
-                    <div class="stat-content">
-                        <span class="stat-value">12</span>
-                        <span class="stat-label">Pending Filings</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="quick-actions">
-                <h2>Quick Actions</h2>
-                <div class="actions-grid">
-                    <button class="action-btn" onclick="openModal('newExemption')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="16"></line>
-                            <line x1="8" y1="12" x2="16" y2="12"></line>
-                        </svg>
-                        <span>New Exemption Certificate</span>
-                    </button>
-                    <button class="action-btn" onclick="openModal('taxLookup')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.35-4.35"></path>
-                        </svg>
-                        <span>Tax Rate Lookup</span>
-                    </button>
-                    <button class="action-btn" onclick="openModal('reportIssue')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
-                            <line x1="12" y1="9" x2="12" y2="13"></line>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                        <span>Report Tax Issue</span>
-                    </button>
-                    <button class="action-btn" onclick="openModal('requestHelp')">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                        <span>Request Help</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Upcoming Deadlines -->
-            <div class="deadlines-section">
-                <h2>Upcoming Filing Deadlines</h2>
-                <div class="deadlines-list">
-                    <div class="deadline-item urgent">
-                        <div class="deadline-date">
-                            <span class="day">20</span>
-                            <span class="month">Feb</span>
-                        </div>
-                        <div class="deadline-info">
-                            <h4>California Monthly Filing</h4>
-                            <p>January 2026 sales tax return due</p>
-                        </div>
-                        <span class="deadline-badge urgent">3 days left</span>
-                    </div>
-                    <div class="deadline-item">
-                        <div class="deadline-date">
-                            <span class="day">20</span>
-                            <span class="month">Feb</span>
-                        </div>
-                        <div class="deadline-info">
-                            <h4>Texas Monthly Filing</h4>
-                            <p>January 2026 sales tax return due</p>
-                        </div>
-                        <span class="deadline-badge">3 days left</span>
-                    </div>
-                    <div class="deadline-item">
-                        <div class="deadline-date">
-                            <span class="day">28</span>
-                            <span class="month">Feb</span>
-                        </div>
-                        <div class="deadline-info">
-                            <h4>Florida Monthly Filing</h4>
-                            <p>January 2026 sales tax return due</p>
-                        </div>
-                        <span class="deadline-badge">11 days left</span>
-                    </div>
-                    <div class="deadline-item">
-                        <div class="deadline-date">
-                            <span class="day">01</span>
-                            <span class="month">Mar</span>
-                        </div>
-                        <div class="deadline-info">
-                            <h4>New York Quarterly Filing</h4>
-                            <p>Q4 2025 sales tax return due</p>
-                        </div>
-                        <span class="deadline-badge">12 days left</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Recent Updates -->
-            <div class="updates-section">
-                <h2>Recent Updates & Announcements</h2>
-                <div class="updates-list">
-                    <article class="update-card">
-                        <span class="update-tag policy">Policy Update</span>
-                        <h3>Colorado Delivery Fee Changes</h3>
-                        <p>Starting March 1, 2026, Colorado will update its retail delivery fee structure. Review the new requirements.</p>
-                        <div class="update-meta">
-                            <span class="update-date">Jan 28, 2026</span>
-                            <a href="#" class="update-link">Read more →</a>
-                        </div>
-                    </article>
-                    <article class="update-card">
-                        <span class="update-tag registration">Registration</span>
-                        <h3>New State Registration: Montana</h3>
-                        <p>Whop is now registered to collect sales tax in Montana for applicable digital goods.</p>
-                        <div class="update-meta">
-                            <span class="update-date">Jan 25, 2026</span>
-                            <a href="#" class="update-link">Read more →</a>
-                        </div>
-                    </article>
-                    <article class="update-card">
-                        <span class="update-tag reminder">Reminder</span>
-                        <h3>Annual Exemption Certificate Review</h3>
-                        <p>Q1 exemption certificate audit begins February 1st. Ensure all certificates are up to date.</p>
-                        <div class="update-meta">
-                            <span class="update-date">Jan 22, 2026</span>
-                            <a href="#" class="update-link">Read more →</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
         <!-- Policy Section -->
-        <section id="policy" class="section hidden">
+        <section id="policy" class="section">
             <div class="section-header">
                 <h1>Whop Indirect Tax Policy</h1>
             </div>
@@ -484,241 +295,32 @@
             </div>
         </section>
 
-        <!-- State Directory Section -->
-        <section id="states" class="section hidden">
+        <!-- Taxability Section -->
+        <section id="taxability" class="section hidden">
             <div class="section-header">
-                <h1>State Tax Directory</h1>
-                <p class="subtitle">Sales tax information by state</p>
+                <h1>Taxability</h1>
+                <p class="subtitle">Product codes and jurisdiction tax matrices</p>
             </div>
 
-            <div class="state-filters">
-                <div class="filter-group">
-                    <label>Filter by Status:</label>
-                    <select id="stateStatusFilter">
-                        <option value="all">All States</option>
-                        <option value="registered">Registered</option>
-                        <option value="pending">Pending Registration</option>
-                        <option value="not-required">Not Required</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Search:</label>
-                    <input type="text" id="stateSearch" placeholder="Search states...">
+            <div class="taxability-intro">
+                <p>This section contains the product taxability matrices that define how different product types are taxed across jurisdictions. These matrices are used to determine the correct tax treatment for each transaction.</p>
+            </div>
+
+            <!-- Product Codes Section -->
+            <div class="taxability-section">
+                <h2>Product Codes</h2>
+                <p class="section-desc">Product tax codes used to categorize items for tax calculation purposes.</p>
+                <div class="matrix-placeholder" id="productCodesMatrix">
+                    <p>Product codes matrix will be displayed here.</p>
                 </div>
             </div>
 
-            <div class="states-grid" id="statesGrid">
-                <!-- States will be populated by JavaScript -->
-            </div>
-        </section>
-
-        <!-- Resources Section -->
-        <section id="resources" class="section hidden">
-            <div class="section-header">
-                <h1>Resources & Documentation</h1>
-                <p class="subtitle">Guides, policies, and reference materials</p>
-            </div>
-
-            <div class="resources-grid">
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                        </svg>
-                        Guides & How-Tos
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="#">Sales Tax 101: The Basics</a></li>
-                        <li><a href="#">Understanding Nexus Requirements</a></li>
-                        <li><a href="#">How to Handle Exemption Certificates</a></li>
-                        <li><a href="#">Filing Process Step-by-Step</a></li>
-                        <li><a href="#">Handling Tax on Digital Products</a></li>
-                    </ul>
-                </div>
-
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                            <polyline points="14 2 14 8 20 8"></polyline>
-                        </svg>
-                        Policies & Procedures
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="#">Whop Sales Tax Policy</a></li>
-                        <li><a href="#">Refund & Tax Adjustment Policy</a></li>
-                        <li><a href="#">Exemption Certificate Policy</a></li>
-                        <li><a href="#">State Registration Procedures</a></li>
-                        <li><a href="#">Audit Response Protocol</a></li>
-                    </ul>
-                </div>
-
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
-                            <line x1="12" y1="17" x2="12.01" y2="17"></line>
-                        </svg>
-                        FAQs
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="#">Why do we collect sales tax?</a></li>
-                        <li><a href="#">What is economic nexus?</a></li>
-                        <li><a href="#">How are digital products taxed?</a></li>
-                        <li><a href="#">What if a customer disputes tax?</a></li>
-                        <li><a href="#">How do I request a tax exemption?</a></li>
-                    </ul>
-                </div>
-
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                        Templates & Forms
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="#">Multi-State Exemption Form</a></li>
-                        <li><a href="#">Resale Certificate Template</a></li>
-                        <li><a href="#">Tax Dispute Response Template</a></li>
-                        <li><a href="#">State Registration Checklist</a></li>
-                        <li><a href="#">Audit Documentation Checklist</a></li>
-                    </ul>
-                </div>
-
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                        Training Materials
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="#">Sales Tax Onboarding Course</a></li>
-                        <li><a href="#">Advanced Tax Concepts</a></li>
-                        <li><a href="#">Customer Support Tax Training</a></li>
-                        <li><a href="#">Tax Software Walkthrough</a></li>
-                        <li><a href="#">Annual Compliance Training</a></li>
-                    </ul>
-                </div>
-
-                <div class="resource-category">
-                    <h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                        External Resources
-                    </h3>
-                    <ul class="resource-list">
-                        <li><a href="https://www.avalara.com/" target="_blank">Avalara Tax Engine</a></li>
-                        <li><a href="https://www.irs.gov/" target="_blank">IRS Website</a></li>
-                        <li><a href="https://www.taxjar.com/" target="_blank">TaxJar Resources</a></li>
-                        <li><a href="https://www.salestaxinstitute.com/" target="_blank">Sales Tax Institute</a></li>
-                        <li><a href="https://www.streamlinedsalestax.org/" target="_blank">Streamlined Sales Tax</a></li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- Tools Section -->
-        <section id="tools" class="section hidden">
-            <div class="section-header">
-                <h1>Tools & Calculators</h1>
-                <p class="subtitle">Utilities to help with sales tax calculations and research</p>
-            </div>
-
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="4" y="2" width="16" height="20" rx="2"></rect>
-                            <line x1="8" y1="6" x2="16" y2="6"></line>
-                            <line x1="8" y1="10" x2="16" y2="10"></line>
-                            <line x1="8" y1="14" x2="12" y2="14"></line>
-                            <line x1="8" y1="18" x2="12" y2="18"></line>
-                        </svg>
-                    </div>
-                    <h3>Tax Rate Calculator</h3>
-                    <p>Calculate the combined sales tax rate for any US address including state, county, city, and special district taxes.</p>
-                    <div class="tool-form">
-                        <input type="text" id="calcStreet" placeholder="Street Address">
-                        <input type="text" id="calcCity" placeholder="City">
-                        <div class="tool-form-row">
-                            <input type="text" id="calcState" placeholder="State" maxlength="2">
-                            <input type="text" id="calcZip" placeholder="ZIP Code" maxlength="10">
-                        </div>
-                        <button class="btn-primary" onclick="calculateTaxRate()">Calculate Rate</button>
-                    </div>
-                    <div class="tool-result" id="taxRateResult"></div>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                        </svg>
-                    </div>
-                    <h3>Tax Amount Calculator</h3>
-                    <p>Quickly calculate the tax amount for a given price and tax rate. Useful for customer inquiries.</p>
-                    <div class="tool-form">
-                        <input type="number" id="calcPrice" placeholder="Price ($)" step="0.01">
-                        <input type="number" id="calcRate" placeholder="Tax Rate (%)" step="0.001">
-                        <button class="btn-primary" onclick="calculateTaxAmount()">Calculate Tax</button>
-                    </div>
-                    <div class="tool-result" id="taxAmountResult"></div>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <h3>Nexus Threshold Checker</h3>
-                    <p>Check if Whop has met economic nexus thresholds in specific states based on sales volume and transaction count.</p>
-                    <div class="tool-form">
-                        <select id="nexusState">
-                            <option value="">Select a State</option>
-                        </select>
-                        <input type="number" id="nexusSales" placeholder="Total Sales ($)" step="0.01">
-                        <input type="number" id="nexusTransactions" placeholder="Number of Transactions">
-                        <button class="btn-primary" onclick="checkNexus()">Check Nexus</button>
-                    </div>
-                    <div class="tool-result" id="nexusResult"></div>
-                </div>
-
-                <div class="tool-card">
-                    <div class="tool-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                            <circle cx="12" cy="10" r="3"></circle>
-                        </svg>
-                    </div>
-                    <h3>Product Taxability Lookup</h3>
-                    <p>Check if specific product categories are taxable in different states. Digital goods rules vary by state.</p>
-                    <div class="tool-form">
-                        <select id="productCategory">
-                            <option value="">Select Product Category</option>
-                            <option value="digital-course">Digital Courses</option>
-                            <option value="software-saas">Software/SaaS</option>
-                            <option value="ebook">eBooks</option>
-                            <option value="digital-download">Digital Downloads</option>
-                            <option value="membership">Memberships</option>
-                            <option value="consulting">Consulting Services</option>
-                        </select>
-                        <select id="taxabilityState">
-                            <option value="">Select a State</option>
-                        </select>
-                        <button class="btn-primary" onclick="checkTaxability()">Check Taxability</button>
-                    </div>
-                    <div class="tool-result" id="taxabilityResult"></div>
+            <!-- Jurisdiction Matrix Section -->
+            <div class="taxability-section">
+                <h2>Jurisdiction Matrix</h2>
+                <p class="section-desc">Tax treatment by jurisdiction showing which product types are taxable in each location.</p>
+                <div class="matrix-placeholder" id="jurisdictionMatrix">
+                    <p>Jurisdiction matrix will be displayed here.</p>
                 </div>
             </div>
         </section>

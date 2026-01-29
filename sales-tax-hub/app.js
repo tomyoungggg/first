@@ -155,10 +155,6 @@ const taxabilityRules = {
 document.addEventListener('DOMContentLoaded', function() {
     initNavigation();
     populateRegistrations();
-    populateStates();
-    populateStateDropdowns();
-    initSearch();
-    initFilters();
 });
 
 // Populate Registrations Tab
