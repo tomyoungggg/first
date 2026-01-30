@@ -1,6 +1,6 @@
 // Password Protection
 // Change this password to whatever you want
-const SITE_PASSWORD = 'hunterforpresident';
+const SITE_PASSWORD = 'whoptax2025!';
 
 // Check if already authenticated
 function checkAuth() {
